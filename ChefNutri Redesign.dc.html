@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="./image-slot.js"></script>
+  <style>
+    body { margin: 0; background: oklch(97% 0.014 95); font-family: 'Inter', sans-serif; }
+    * { box-sizing: border-box; }
+    a { color: oklch(40% 0.13 145); text-decoration: none; }
+    a:hover { color: oklch(30% 0.13 145); }
+    @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes heroKenburns { from { transform: scale(1); } to { transform: scale(1.12); } }
+    @keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes sheetUp { from { transform: translateY(100%); opacity: 0.6; } to { transform: translateY(0); opacity: 1; } }
+    h1, h2, h3 { letter-spacing: -0.01em; }
+    ::-webkit-scrollbar { display: none; }
+    * { scrollbar-width: none; }
+  </style>
+</helmet>
+
+<div style="max-width: 1280px; margin: 0 auto; background: oklch(97% 0.014 95); min-height: 100vh; position: relative; box-shadow: 0 0 40px oklch(20% 0.02 340 / 0.06);">
+
+  <!-- Announcement bar -->
+  <div style="background: oklch(22% 0.02 340); color: oklch(97% 0.01 60); text-align: center; font-size: 12.5px; padding: 8px 16px; letter-spacing: 0.02em;">
+    10% OFF na primeira compra acima de R$200 com o cupom <strong style="color: oklch(78% 0.14 145);">NUTRI10</strong> · Frete grátis para Salvador e Lauro de Freitas
+  </div>
+
+  <!-- Header -->
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; position: sticky; top: 0; z-index: 40; background: oklch(97% 0.014 95 / 0.96); backdrop-filter: blur(6px); border-bottom: 1px solid oklch(90% 0.01 340);">
+    <button onclick="{{ toggleMenu }}" aria-label="Menu" style="background: none; border: none; padding: 6px; display: flex; flex-direction: column; gap: 4px; cursor: pointer;">
+      <span style="width: 24px; height: 2px; background: oklch(22% 0.02 340); display: block;"></span>
+      <span style="width: 24px; height: 2px; background: oklch(22% 0.02 340); display: block;"></span>
+      <span style="width: 24px; height: 2px; background: oklch(22% 0.02 340); display: block;"></span>
+    </button>
+
+    <a href="#" onclick="{{ goHome }}" style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: clamp(18px,3vw,24px); color: oklch(40% 0.13 145); letter-spacing: -0.01em;">Chef<span style="color: oklch(22% 0.02 340);">&amp;</span>Nutri</a>
+
+    <div style="display: flex; align-items: center; gap: 6px;">
+    <button onclick="{{ goSearch }}" aria-label="Buscar" style="background: none; border: none; padding: 6px; cursor: pointer; color: oklch(22% 0.02 340);">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+    <button onclick="{{ openCart }}" aria-label="Carrinho" style="background: none; border: none; position: relative; cursor: pointer; padding: 6px;">
+      <div style="width: 24px; height: 20px; border: 2px solid oklch(22% 0.02 340); border-top: none; border-radius: 0 0 4px 4px; position: relative;">
+        <div style="position: absolute; top: -10px; left: 3px; width: 14px; height: 10px; border: 2px solid oklch(22% 0.02 340); border-bottom: none; border-radius: 8px 8px 0 0;"></div>
+      </div>
+      <span style="position: absolute; top: -4px; right: -4px; background: oklch(40% 0.13 145); color: white; font-size: 10px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{{ cartCount }}</span>
+    </button>
+    </div>
+  </header>
+
+  <!-- Nav drawer -->
+  <sc-if value="{{ menuOpen }}">
+    <div onclick="{{ toggleMenu }}" style="position: fixed; inset: 0; background: oklch(20% 0.02 340 / 0.45); z-index: 50; animation: fadeIn 0.2s ease;"></div>
+    <nav style="position: fixed; top: 0; left: 0; bottom: 0; width: min(320px, 84vw); background: oklch(97% 0.014 95); z-index: 51; padding: 20px; overflow-y: auto; animation: slideIn 0.25s ease; box-shadow: 4px 0 24px oklch(20% 0.02 340 / 0.15);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <span style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 20px; color: oklch(40% 0.13 145);">Chef&amp;Nutri</span>
+        <button onclick="{{ toggleMenu }}" style="background: none; border: none; font-size: 22px; line-height: 1; cursor: pointer; color: oklch(22% 0.02 340); padding: 4px;">&times;</button>
+      </div>
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+        <a href="#" onclick="{{ item.onClick }}" style="display: block; padding: 13px 4px; font-size: 16px; font-weight: 600; color: oklch(22% 0.02 340); border-bottom: 1px solid oklch(92% 0.01 340);">{{ item.label }}</a>
+      </sc-for>
+      <div style="margin-top: 24px; padding: 16px; background: oklch(93% 0.05 145); border-radius: 14px;">
+        <div style="font-size: 13px; font-weight: 700; color: oklch(40% 0.13 145); margin-bottom: 4px;">Fale com a gente</div>
+        <a href="https://api.whatsapp.com/send?phone=5571996115102" style="font-size: 14px; font-weight: 600; color: oklch(22% 0.02 340);">(71) 9 9611-5102</a>
+      </div>
+    </nav>
+  </sc-if>
+
+  <main>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Home" style="position: relative;">
+      <div style="position: relative; width: 100%; height: 100vh; min-height: 560px; max-height: 940px; overflow: hidden;">
+        <sc-for list="{{ heroSlides }}" as="slide" hint-placeholder-count="3">
+          <div style="position: absolute; inset: 0; z-index: 1; opacity: {{ slide.opacity }}; transition: opacity 1s ease; pointer-events: {{ slide.pointerEvents }}; overflow: hidden;">
+            <div style="width: 100%; height: 100%; animation: heroKenburns 9s ease-in-out infinite alternate;">
+              <image-slot id="{{ slide.imgId }}" shape="rect" src="{{ slide.img }}" placeholder="{{ slide.title }}"></image-slot>
+            </div>
+          </div>
+        </sc-for>
+        <div style="position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; z-index: 2; background: oklch(70% 0.15 145 / 0.3); border-radius: 62% 38% 55% 45% / 48% 42% 58% 52%; pointer-events: none; filter: blur(4px);"></div>
+        <div style="position: absolute; inset: 0; z-index: 3; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.15) 0%, oklch(20% 0.02 340 / 0) 35%, oklch(15% 0.05 145 / 0.82) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,64px) clamp(20px,4vw,48px) clamp(80px,10vh,120px); pointer-events: none;">
+          <div style="animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;">
+            <span style="display: inline-block; color: oklch(85% 0.1 145); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">Chef&amp;Nutri</span>
+            <h1 style="font-family: 'Playfair Display', serif; color: white; font-size: clamp(30px,6vw,56px); font-weight: 800; line-height: 1.05; margin: 0 0 14px; max-width: 560px;">{{ activeHero.title }}</h1>
+            <p style="color: oklch(94% 0.01 60); font-size: clamp(15px,2vw,18px); margin: 0 0 22px; max-width: 460px; line-height: 1.5;">{{ activeHero.subtitle }}</p>
+            <button onclick="{{ activeHero.onClick }}" style="pointer-events: auto; align-self: flex-start; background: oklch(40% 0.13 145); color: white; border: none; padding: 15px 30px; border-radius: 100px; font-weight: 700; font-size: 15px; cursor: pointer;" style-hover="background: oklch(32% 0.13 145); transform: translateY(-2px);">{{ activeHero.cta }}</button>
+          </div>
+        </div>
+        <button onclick="{{ prevHero }}" aria-label="Anterior" style="position: absolute; z-index: 4; left: 16px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: oklch(20% 0.02 340 / 0.35); color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);" style-hover="background: oklch(20% 0.02 340 / 0.55);">‹</button>
+        <button onclick="{{ nextHero }}" aria-label="Próximo" style="position: absolute; z-index: 4; right: 16px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: oklch(20% 0.02 340 / 0.35); color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);" style-hover="background: oklch(20% 0.02 340 / 0.55);">›</button>
+        <div style="position: absolute; z-index: 4; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
+          <sc-for list="{{ heroDots }}" as="dot" hint-placeholder-count="3">
+            <button onclick="{{ dot.onClick }}" style="width: {{ dot.size }}; height: 8px; border-radius: 100px; background: {{ dot.color }}; border: none; cursor: pointer; padding: 0; transition: width 0.3s ease;"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="benefits" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: oklch(90% 0.01 340); margin: -48px clamp(16px,4vw,32px) 0; border-radius: 20px; overflow: hidden; position: relative; z-index: 5; box-shadow: 0 12px 32px oklch(20% 0.02 340 / 0.12); {{ reveal.benefits }}">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <div style="background: white; padding: 18px 14px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;">
+            <div style="width: 40px; height: 40px; border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; border: 2px solid oklch(40% 0.13 145); display: flex; align-items: center; justify-content: center;">
+              <div style="width: 14px; height: 14px; background: oklch(40% 0.13 145); border-radius: {{ b.shape }};"></div>
+            </div>
+            <div style="font-size: 12.5px; font-weight: 600; color: oklch(30% 0.02 340); line-height: 1.35;">{{ b.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-reveal="shelfBest" style="padding: 56px clamp(16px,4vw,32px) 8px; {{ reveal.shelfBest }}">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.4vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0;">Mais Vendidos</h2>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="#" onclick="{{ goPizzas }}" style="font-size: 13.5px; font-weight: 700;">Ver tudo →</a>
+            <button onclick="{{ bestPrev }}" aria-label="Anterior" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">‹</button>
+            <button onclick="{{ bestNext }}" aria-label="Próximo" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">›</button>
+          </div>
+        </div>
+        <div data-carousel="bestSellers" style="display: flex; overflow-x: auto; gap: 18px; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 12px; margin: 0 -4px;">
+          <sc-for list="{{ bestSellers }}" as="p" hint-placeholder-count="4">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 20px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; flex: 0 0 240px; scroll-snap-align: start; transition: transform 0.35s ease, box-shadow 0.35s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 16px 32px oklch(20% 0.02 340 / 0.14);">
+              <div style="aspect-ratio: 1; position: relative; overflow: hidden;">
+                <image-slot id="{{ p.imgId }}" shape="rect" src="{{ p.img }}" placeholder="{{ p.name }}"></image-slot>
+              </div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <div style="font-weight: 700; font-size: 15px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                    <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: auto; font-weight: 800; font-size: 17px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="editorial1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 0; margin: 40px 0; {{ reveal.editorial1 }}">
+        <div style="aspect-ratio: 4/3;"><image-slot id="editorial-1" shape="rect" placeholder="Ingredientes naturais sobre a bancada"></image-slot></div>
+        <div style="padding: clamp(24px,4vw,56px);">
+          <span style="display: inline-block; color: oklch(40% 0.13 145); font-weight: 700; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Nossa cozinha</span>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.2vw,32px); font-weight: 800; color: oklch(22% 0.02 340); margin: 0 0 14px; line-height: 1.15;">Sem glúten, sem lactose, sem abrir mão do sabor</h2>
+          <p style="font-size: 15px; line-height: 1.7; color: oklch(38% 0.02 340); margin: 0 0 20px; max-width: 420px;">Cada receita é testada até chegar ao sabor da versão tradicional — só que mais leve, mais natural, sem conservantes.</p>
+          <a href="#" onclick="{{ goDiferenciais }}" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14.5px; color: oklch(40% 0.13 145);">Conheça nossos diferenciais →</a>
+        </div>
+      </div>
+
+      <div data-reveal="shelfSalgados" style="padding: 8px clamp(16px,4vw,32px) 8px; {{ reveal.shelfSalgados }}">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.4vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0;">Salgados</h2>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="#" style="font-size: 13.5px; font-weight: 700;">Ver tudo →</a>
+            <button onclick="{{ salgadosPrev }}" aria-label="Anterior" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">‹</button>
+            <button onclick="{{ salgadosNext }}" aria-label="Próximo" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">›</button>
+          </div>
+        </div>
+        <div data-carousel="salgados" style="display: flex; overflow-x: auto; gap: 18px; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 12px; margin: 0 -4px;">
+          <sc-for list="{{ salgados }}" as="p" hint-placeholder-count="4">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 20px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; flex: 0 0 240px; scroll-snap-align: start; transition: transform 0.35s ease, box-shadow 0.35s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 16px 32px oklch(20% 0.02 340 / 0.14);">
+              <div style="aspect-ratio: 1;"><image-slot id="{{ p.imgId }}" shape="rect" placeholder="{{ p.name }}"></image-slot></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <div style="font-weight: 700; font-size: 15px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                    <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: auto; font-weight: 800; font-size: 17px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="editorial2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 0; margin: 40px 0; {{ reveal.editorial2 }}">
+        <div style="padding: clamp(24px,4vw,56px); order: 2;">
+          <span style="display: inline-block; color: oklch(40% 0.13 145); font-weight: 700; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Feito na Bahia</span>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.2vw,32px); font-weight: 800; color: oklch(22% 0.02 340); margin: 0 0 14px; line-height: 1.15;">Direto do forno para a sua mesa</h2>
+          <p style="font-size: 15px; line-height: 1.7; color: oklch(38% 0.02 340); margin: 0 0 20px; max-width: 420px;">Produzido em Lauro de Freitas, com congelamento que preserva sabor e nutrientes — pronto em minutos, quando você quiser.</p>
+          <a href="#" onclick="{{ goSobre }}" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14.5px; color: oklch(40% 0.13 145);">Conheça nossa história →</a>
+        </div>
+        <div style="aspect-ratio: 4/3; order: 1;"><image-slot id="editorial-2" shape="rect" placeholder="Pizza saindo do forno"></image-slot></div>
+      </div>
+
+      <div data-reveal="shelfVegVeg" style="padding: 8px clamp(16px,4vw,32px) 8px; {{ reveal.shelfVegVeg }}">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.4vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0;">Vegetarianos &amp; Veganos</h2>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="#" style="font-size: 13.5px; font-weight: 700;">Ver tudo →</a>
+            <button onclick="{{ vegVegPrev }}" aria-label="Anterior" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">‹</button>
+            <button onclick="{{ vegVegNext }}" aria-label="Próximo" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">›</button>
+          </div>
+        </div>
+        <div data-carousel="vegVeg" style="display: flex; overflow-x: auto; gap: 18px; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 12px; margin: 0 -4px;">
+          <sc-for list="{{ vegetarianosVeganos }}" as="p" hint-placeholder-count="3">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 20px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; flex: 0 0 240px; scroll-snap-align: start; transition: transform 0.35s ease, box-shadow 0.35s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 16px 32px oklch(20% 0.02 340 / 0.14);">
+              <div style="aspect-ratio: 1;"><image-slot id="{{ p.imgId }}" shape="rect" placeholder="{{ p.name }}"></image-slot></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <div style="font-weight: 700; font-size: 15px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                    <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: auto; font-weight: 800; font-size: 17px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="shelfPaes" style="padding: 8px clamp(16px,4vw,32px) 8px; {{ reveal.shelfPaes }}">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px;">
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.4vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0;">Pães</h2>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="#" style="font-size: 13.5px; font-weight: 700;">Ver tudo →</a>
+            <button onclick="{{ paesPrev }}" aria-label="Anterior" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">‹</button>
+            <button onclick="{{ paesNext }}" aria-label="Próximo" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid oklch(88% 0.01 340); background: white; cursor: pointer; font-size: 16px;">›</button>
+          </div>
+        </div>
+        <div data-carousel="paes" style="display: flex; overflow-x: auto; gap: 18px; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 12px; margin: 0 -4px;">
+          <sc-for list="{{ paes }}" as="p" hint-placeholder-count="2">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 20px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; flex: 0 0 240px; scroll-snap-align: start; transition: transform 0.35s ease, box-shadow 0.35s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 16px 32px oklch(20% 0.02 340 / 0.14);">
+              <div style="aspect-ratio: 1;"><image-slot id="{{ p.imgId }}" shape="rect" placeholder="{{ p.name }}"></image-slot></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <div style="font-weight: 700; font-size: 15px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                    <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: auto; font-weight: 800; font-size: 17px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="blog" style="padding: 40px clamp(16px,4vw,32px) 36px; {{ reveal.blog }}">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,28px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 14px;">Nutrição em Palavras</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+          <sc-for list="{{ blogPosts }}" as="post" hint-placeholder-count="3">
+            <div onclick="{{ post.onClick }}" style="cursor: pointer; background: white; border-radius: 16px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 14px 28px oklch(20% 0.02 340 / 0.12);">
+              <div style="aspect-ratio: 16/9;"><image-slot id="{{ post.imgId }}" shape="rect" placeholder="Imagem do post"></image-slot></div>
+              <div style="padding: 14px;">
+                <div style="font-size: 11.5px; color: oklch(50% 0.02 340); margin-bottom: 6px;">{{ post.date }}</div>
+                <div style="font-weight: 700; font-size: 14.5px; color: oklch(22% 0.02 340); line-height: 1.35;">{{ post.title }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal="newsletter" style="margin: 0 clamp(16px,4vw,32px) 36px; background: oklch(93% 0.05 145); border-radius: 34px 40px 30px 44px; padding: clamp(20px,4vw,32px); text-align: center; position: relative; overflow: hidden; {{ reveal.newsletter }}">
+        <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: oklch(88% 0.06 145 / 0.6); border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%;"></div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: clamp(18px,2.5vw,22px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 8px;">Receba novidades e promoções</h3>
+        <p style="color: oklch(45% 0.02 340); font-size: 14px; margin: 0 0 18px;">Cadastre-se e fique por dentro dos lançamentos Chef&amp;Nutri.</p>
+        <form style="display: flex; gap: 8px; max-width: 380px; margin: 0 auto; flex-wrap: wrap;" onsubmit="{{ preventSubmit }}">
+          <input type="email" placeholder="Seu e-mail" style="flex: 1; min-width: 160px; padding: 12px 16px; border-radius: 100px; border: 1px solid oklch(88% 0.01 340); font-size: 14px;" />
+          <button style="background: oklch(40% 0.13 145); color: white; border: none; padding: 12px 22px; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer;">Cadastrar</button>
+        </form>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ PIZZAS LISTING ============ -->
+  <sc-if value="{{ isPizzas }}">
+    <section data-screen-label="Pizzas" style="padding: 24px clamp(16px,4vw,32px) 48px;">
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(24px,4vw,34px); font-weight: 800; color: oklch(22% 0.02 340); margin: 0 0 6px;">Pizzas</h1>
+      <p style="color: oklch(45% 0.02 340); font-size: 14.5px; margin: 0 0 20px;">Massa artesanal, sem glúten e sem lactose, prontas em minutos no forno.</p>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;">
+        <div style="display: {{ desktopFilterBarDisplay }}; gap: 8px; flex-wrap: wrap;">
+          <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="5">
+            <button onclick="{{ f.onClick }}" style="border: 1px solid {{ f.borderColor }}; background: {{ f.bg }}; color: {{ f.color }}; padding: 9px 16px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">{{ f.label }}</button>
+          </sc-for>
+          <sc-if value="{{ hasActiveFilters }}">
+            <button onclick="{{ clearFilters }}" style="border: none; background: none; color: oklch(50% 0.02 340); padding: 9px 6px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline;">Limpar filtros</button>
+          </sc-if>
+        </div>
+        <button onclick="{{ openMobileFilter }}" style="display: {{ mobileFilterBtnDisplay }}; align-items: center; gap: 8px; border: 1px solid oklch(85% 0.01 340); background: white; padding: 10px 18px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: oklch(22% 0.02 340);">
+          <span>Filtrar</span>
+          <sc-if value="{{ hasActiveFilters }}"><span style="background: oklch(40% 0.13 145); color: white; font-size: 11px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">{{ filterChips.length }}</span></sc-if>
+        </button>
+        <div style="position: relative;">
+          <select onchange="{{ setSortFromEvent }}" style="appearance: none; border: 1px solid oklch(85% 0.01 340); background: white; padding: 10px 34px 10px 16px; border-radius: 100px; font-size: 13.5px; font-weight: 600; color: oklch(30% 0.02 340); cursor: pointer;">
+            <sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="4">
+              <option value="{{ o.key }}">{{ o.label }}</option>
+            </sc-for>
+          </select>
+        </div>
+      </div>
+
+      <div style="font-size: 13px; color: oklch(50% 0.02 340); margin-bottom: 18px;">{{ resultCountLabel }}</div>
+
+      <sc-if value="{{ noPizzaResults }}">
+        <div style="text-align: center; padding: 60px 20px; max-width: 420px; margin: 0 auto;">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: oklch(93% 0.05 145); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(40% 0.13 145)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 10px;">Nenhuma pizza encontrada</h2>
+          <p style="font-size: 14px; color: oklch(45% 0.02 340); line-height: 1.6; margin: 0 0 24px;">Nenhum produto corresponde aos filtros selecionados. Tente remover algum filtro.</p>
+          <button onclick="{{ clearFilters }}" style="border: none; background: oklch(40% 0.13 145); color: white; padding: 12px 24px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer;">Limpar filtros</button>
+        </div>
+      </sc-if>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px;">
+        <sc-for list="{{ filteredPizzas }}" as="p" hint-placeholder-count="5">
+          <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 20px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 18px 36px oklch(20% 0.02 340 / 0.12);">
+            <div style="aspect-ratio: 1; position: relative;">
+              <image-slot id="{{ p.imgId }}" shape="rect" src="{{ p.img }}" placeholder="{{ p.name }}"></image-slot>
+              <button onclick="{{ p.onQuickView }}" aria-label="Visualização rápida" style="position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; border: none; background: white; color: oklch(22% 0.02 340); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px oklch(20% 0.02 340 / 0.18); z-index: 2;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div style="padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+              <div style="font-weight: 700; font-size: 16px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+              <div style="font-size: 12.5px; color: oklch(50% 0.02 340);">{{ p.size }}</div>
+              <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                  <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                </sc-for>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 6px;">
+                <span style="font-weight: 800; font-size: 18px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</span>
+              </div>
+              <button onclick="{{ p.onBuyNow }}" style="width: 100%; margin-top: 4px; background: oklch(40% 0.13 145); color: white; border: none; padding: 11px; border-radius: 100px; font-weight: 700; font-size: 13.5px; cursor: pointer; transition: background 0.2s ease;" style-hover="background: oklch(32% 0.13 145);">Comprar Agora</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ BUSCA ============ -->
+  <sc-if value="{{ isBusca }}">
+    <section data-screen-label="Busca" style="padding: 24px clamp(16px,4vw,32px) 48px;">
+      <form onsubmit="{{ preventSubmit }}" style="max-width: 560px; margin: 0 auto 8px; position: relative;">
+        <input value="{{ searchQuery }}" oninput="{{ updateSearchQuery }}" placeholder="Buscar pizzas, salgados, pães…" autofocus="true" style="width: 100%; padding: 16px 20px; border-radius: 100px; border: 1px solid oklch(85% 0.01 340); font-size: 16px; box-sizing: border-box;" />
+      </form>
+      <div style="text-align: center; margin-bottom: 28px;">
+        <sc-if value="{{ hasSearchQuery }}">
+          <span style="font-size: 13.5px; color: oklch(45% 0.02 340);">Resultados para “{{ searchQuery }}” · {{ searchResultCountLabel }}</span>
+        </sc-if>
+        <sc-if value="{{ noSearchQuery }}">
+          <span style="font-size: 13.5px; color: oklch(45% 0.02 340);">Mostrando todos os produtos · {{ searchResultCountLabel }}</span>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ searchResults.length }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;">
+          <div style="display: {{ desktopFilterBarDisplay }}; gap: 8px; flex-wrap: wrap;">
+            <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="5">
+              <button onclick="{{ f.onClick }}" style="border: 1px solid {{ f.borderColor }}; background: {{ f.bg }}; color: {{ f.color }}; padding: 9px 16px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer;">{{ f.label }}</button>
+            </sc-for>
+            <sc-if value="{{ hasActiveFilters }}">
+              <button onclick="{{ clearFilters }}" style="border: none; background: none; color: oklch(50% 0.02 340); padding: 9px 6px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline;">Limpar filtros</button>
+            </sc-if>
+          </div>
+          <button onclick="{{ openMobileFilter }}" style="display: {{ mobileFilterBtnDisplay }}; align-items: center; gap: 8px; border: 1px solid oklch(85% 0.01 340); background: white; padding: 10px 18px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: oklch(22% 0.02 340);">Filtrar</button>
+          <select onchange="{{ setSortFromEvent }}" style="appearance: none; border: 1px solid oklch(85% 0.01 340); background: white; padding: 10px 34px 10px 16px; border-radius: 100px; font-size: 13.5px; font-weight: 600; color: oklch(30% 0.02 340); cursor: pointer;">
+            <sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="4">
+              <option value="{{ o.key }}">{{ o.label }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+          <sc-for list="{{ searchResults }}" as="p" hint-placeholder-count="6">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 18px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); display: flex; flex-direction: column; transition: transform 0.3s ease;" style-hover="transform: translateY(-6px);">
+              <div style="aspect-ratio: 1; position: relative;">
+                <image-slot id="{{ p.imgId }}-s" shape="rect" src="{{ p.img }}" placeholder="{{ p.name }}"></image-slot>
+                <button onclick="{{ p.onQuickView }}" aria-label="Visualização rápida" style="position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: none; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px oklch(20% 0.02 340 / 0.18); z-index: 2;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div style="padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1;">
+                <div style="font-weight: 700; font-size: 14px; color: oklch(22% 0.02 340);">{{ p.name }}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                    <span style="font-size: 10px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 3px 7px; border-radius: 100px;">{{ t }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top: auto; font-weight: 800; font-size: 15px; color: oklch(22% 0.02 340);">R$ {{ p.priceLabel }}</div>
+                <button onclick="{{ p.onBuyNow }}" style="width: 100%; margin-top: 4px; background: oklch(40% 0.13 145); color: white; border: none; padding: 10px; border-radius: 100px; font-weight: 700; font-size: 13px; cursor: pointer;">Comprar Agora</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ noSearchResults }}">
+        <div style="text-align: center; padding: 60px 20px; max-width: 420px; margin: 0 auto;">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: oklch(93% 0.05 145); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(40% 0.13 145)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 10px;">Nenhum produto encontrado</h2>
+          <p style="font-size: 14px; color: oklch(45% 0.02 340); line-height: 1.6; margin: 0 0 24px;">Não encontramos resultados para “{{ searchQuery }}”. Tente outro termo ou explore nossas categorias.</p>
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button onclick="{{ clearFilters }}" style="border: 1px solid oklch(85% 0.01 340); background: white; padding: 11px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 700; cursor: pointer;">Limpar filtros</button>
+            <button onclick="{{ goPizzas }}" style="background: oklch(40% 0.13 145); color: white; border: none; padding: 11px 22px; border-radius: 100px; font-weight: 700; font-size: 13.5px; cursor: pointer;">Ver Pizzas</button>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
+
+  <!-- ============ FILTER DRAWER (mobile) ============ -->
+  <sc-if value="{{ mobileFilterOpen }}">
+    <div onclick="{{ closeMobileFilter }}" style="position: fixed; inset: 0; background: oklch(20% 0.02 340 / 0.45); z-index: 60; animation: fadeIn 0.2s ease;"></div>
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; max-height: 82vh; background: white; z-index: 61; border-radius: 24px 24px 0 0; padding: 20px 20px calc(20px + env(safe-area-inset-bottom)); animation: sheetUp 0.3s cubic-bezier(0.16,1,0.3,1) both; display: flex; flex-direction: column; gap: 16px; overflow-y: auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; margin: 0; color: oklch(22% 0.02 340);">Filtrar produtos</h3>
+        <button onclick="{{ closeMobileFilter }}" style="background: none; border: none; font-size: 22px; cursor: pointer; color: oklch(30% 0.02 340); padding: 4px;">&times;</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <sc-for list="{{ filterChips }}" as="f" hint-placeholder-count="5">
+          <button onclick="{{ f.onClick }}" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid {{ f.borderColor }}; background: {{ f.bg }}; color: {{ f.color }}; padding: 14px 18px; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer;">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 8px;">
+        <button onclick="{{ clearFilters }}" style="flex: 1; border: 1px solid oklch(85% 0.01 340); background: white; padding: 14px; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer;">Limpar</button>
+        <button onclick="{{ closeMobileFilter }}" style="flex: 1; background: oklch(40% 0.13 145); color: white; border: none; padding: 14px; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer;">Ver resultados</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ QUICK VIEW ============ -->
+  <sc-if value="{{ quickViewProduct }}">
+    <div onclick="{{ closeQuickView }}" style="position: fixed; inset: 0; background: oklch(20% 0.02 340 / 0.5); z-index: 70; animation: fadeIn 0.2s ease;"></div>
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; max-height: 92vh; background: white; z-index: 71; border-radius: 24px 24px 0 0; margin: 0 auto; max-width: 560px; animation: sheetUp 0.32s cubic-bezier(0.16,1,0.3,1) both; overflow-y: auto; box-shadow: 0 -12px 40px oklch(20% 0.02 340 / 0.2);">
+      <button onclick="{{ closeQuickView }}" aria-label="Fechar" style="position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: none; background: oklch(97% 0.014 95); color: oklch(22% 0.02 340); font-size: 18px; cursor: pointer; z-index: 2;">&times;</button>
+      <div style="aspect-ratio: 4/3;"><image-slot id="{{ quickViewProduct.imgId }}-qv" shape="rect" src="{{ quickViewProduct.img }}" placeholder="{{ quickViewProduct.name }}"></image-slot></div>
+      <div style="padding: 24px;">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+          <sc-for list="{{ quickViewProduct.tags }}" as="t" hint-placeholder-count="2">
+            <span style="font-size: 10.5px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 4px 9px; border-radius: 100px;">{{ t }}</span>
+          </sc-for>
+        </div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 4px; line-height: 1.2;">{{ quickViewProduct.name }}</h2>
+        <div style="font-size: 13px; color: oklch(50% 0.02 340); margin-bottom: 14px;">{{ quickViewProduct.size }}</div>
+        <div style="font-size: 24px; font-weight: 800; color: oklch(22% 0.02 340); margin-bottom: 14px;">R$ {{ quickViewProduct.priceLabel }}</div>
+        <p style="font-size: 14px; line-height: 1.65; color: oklch(35% 0.02 340); margin: 0 0 22px;">{{ quickViewProduct.desc }}</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; border: 1px solid oklch(88% 0.01 340); border-radius: 100px;">
+            <button onclick="{{ decQVQty }}" style="width: 44px; height: 44px; border: none; background: none; font-size: 18px; cursor: pointer;">−</button>
+            <span style="width: 30px; text-align: center; font-weight: 700; font-size: 14px;">{{ quickViewProduct.qty }}</span>
+            <button onclick="{{ incQVQty }}" style="width: 44px; height: 44px; border: none; background: none; font-size: 18px; cursor: pointer;">+</button>
+          </div>
+          <button style="flex: 1; background: oklch(40% 0.13 145); color: white; border: none; padding: 14px; border-radius: 100px; font-weight: 700; font-size: 14.5px; cursor: pointer;">Adicionar · R$ {{ quickViewProduct.totalLabel }}</button>
+        </div>
+        <a href="#" onclick="{{ quickViewProduct.onClick }}" style="display: block; text-align: center; font-size: 13.5px; font-weight: 700; color: oklch(40% 0.13 145);">Ver página completa do produto →</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ PRODUCT DETAIL ============ -->
+  <sc-if value="{{ isProduto }}">
+    <section data-screen-label="Detalhe do produto" style="padding: 0 0 48px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: clamp(20px,4vw,64px); max-width: 1180px; margin: 0 auto; padding: clamp(16px,3vw,32px); overflow: visible;">
+        <div style="position: sticky; top: 80px; align-self: start; border-radius: 24px; overflow: hidden; aspect-ratio: 1; max-width: 100%;">
+          <image-slot id="{{ selectedProduct.imgId }}-detail" shape="rect" src="{{ selectedProduct.img }}" placeholder="{{ selectedProduct.name }}"></image-slot>
+        </div>
+        <div style="padding-top: 8px;">
+          <a href="#" onclick="{{ goPizzas }}" style="font-size: 13px; font-weight: 700; color: oklch(45% 0.02 340);">← Voltar para Pizzas</a>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin: 18px 0 10px;">
+            <sc-for list="{{ selectedProduct.tags }}" as="t" hint-placeholder-count="2">
+              <span style="font-size: 11px; font-weight: 700; color: oklch(40% 0.13 145); background: oklch(93% 0.05 145); padding: 4px 9px; border-radius: 100px;">{{ t }}</span>
+            </sc-for>
+          </div>
+          <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(26px,3.4vw,38px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 6px; line-height: 1.15;">{{ selectedProduct.name }}</h1>
+          <div style="font-size: 14px; color: oklch(50% 0.02 340); margin-bottom: 18px;">{{ selectedProduct.size }}</div>
+          <div style="font-size: 30px; font-weight: 800; color: oklch(22% 0.02 340); margin-bottom: 18px;">R$ {{ selectedProduct.priceLabel }}</div>
+          <p style="font-size: 15px; line-height: 1.7; color: oklch(32% 0.02 340); margin: 0 0 26px; max-width: 480px;">{{ selectedProduct.desc }}</p>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; border: 1px solid oklch(88% 0.01 340); border-radius: 100px;">
+              <button onclick="{{ decQty }}" style="width: 40px; height: 44px; border: none; background: none; font-size: 18px; cursor: pointer; color: oklch(30% 0.02 340);">−</button>
+              <span style="width: 30px; text-align: center; font-weight: 700; font-size: 14px;">{{ qty }}</span>
+              <button onclick="{{ incQty }}" style="width: 40px; height: 44px; border: none; background: none; font-size: 18px; cursor: pointer; color: oklch(30% 0.02 340);">+</button>
+            </div>
+            <button style="flex: 1; max-width: 280px; background: oklch(40% 0.13 145); color: white; border: none; padding: 14px 20px; border-radius: 100px; font-weight: 700; font-size: 14.5px; cursor: pointer;" style-hover="background: oklch(32% 0.13 145);">Adicionar ao Carrinho</button>
+          </div>
+
+          <sc-for list="{{ productAccordions }}" as="acc" hint-placeholder-count="3">
+            <div style="border-top: 1px solid oklch(90% 0.01 340);">
+              <button onclick="{{ acc.onClick }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; padding: 16px 0; cursor: pointer; text-align: left;">
+                <span style="font-weight: 700; font-size: 14.5px; color: oklch(22% 0.02 340);">{{ acc.title }}</span>
+                <span style="font-size: 18px; color: oklch(40% 0.13 145); font-weight: 700;">{{ acc.symbol }}</span>
+              </button>
+              <sc-if value="{{ acc.isOpen }}">
+                <div style="padding: 0 0 18px; font-size: 13.5px; line-height: 1.7; color: oklch(38% 0.02 340); white-space: pre-line;">{{ acc.content }}</div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="max-width: 1180px; margin: 24px auto 0; padding: 0 clamp(16px,3vw,32px);">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 16px;">Você também pode gostar</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;">
+          <sc-for list="{{ relatedPizzas }}" as="p" hint-placeholder-count="3">
+            <div onclick="{{ p.onClick }}" style="cursor: pointer; background: white; border-radius: 16px; overflow: hidden; border: 1px solid oklch(92% 0.01 340); transition: transform 0.3s ease;" style-hover="transform: translateY(-6px);">
+              <div style="aspect-ratio: 1;"><image-slot id="{{ p.imgId }}-r" shape="rect" src="{{ p.img }}" placeholder="{{ p.name }}"></image-slot></div>
+              <div style="padding: 12px;">
+                <div style="font-weight: 700; font-size: 13px; color: oklch(22% 0.02 340); line-height: 1.3;">{{ p.name }}</div>
+                <div style="font-weight: 800; font-size: 14px; color: oklch(22% 0.02 340); margin-top: 5px;">R$ {{ p.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ CARRINHO ============ -->
+  <sc-if value="{{ isCarrinho }}">
+    <section data-screen-label="Carrinho" style="padding: 24px clamp(16px,4vw,32px) 48px;">
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(24px,4vw,30px); font-weight: 800; color: oklch(22% 0.02 340); margin: 0 0 20px;">Seu Carrinho</h1>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+        <sc-for list="{{ cartItems }}" as="item" hint-placeholder-count="2">
+          <div style="display: flex; gap: 14px; background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 12px;">
+            <div style="width: 76px; height: 76px; flex: none; border-radius: 12px; overflow: hidden;"><image-slot id="{{ item.imgId }}-cart" shape="rounded" src="{{ item.img }}" placeholder="{{ item.name }}"></image-slot></div>
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px;">
+              <div style="font-weight: 700; font-size: 14px; color: oklch(22% 0.02 340);">{{ item.name }}</div>
+              <div style="font-size: 12px; color: oklch(50% 0.02 340);">{{ item.size }}</div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+                <div style="display: flex; align-items: center; border: 1px solid oklch(88% 0.01 340); border-radius: 100px;">
+                  <span style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: oklch(75% 0.01 340);">−</span>
+                  <span style="width: 24px; text-align: center; font-weight: 700; font-size: 13px;">{{ item.qty }}</span>
+                  <span style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: oklch(75% 0.01 340);">+</span>
+                </div>
+                <span style="font-weight: 800; font-size: 14.5px; color: oklch(22% 0.02 340);">R$ {{ item.totalLabel }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+        <input placeholder="Cupom de desconto" style="flex: 1; padding: 12px 16px; border-radius: 100px; border: 1px solid oklch(88% 0.01 340); font-size: 13.5px;" />
+        <button style="background: oklch(22% 0.02 340); color: white; border: none; padding: 12px 20px; border-radius: 100px; font-weight: 700; font-size: 13.5px; cursor: pointer;">Aplicar</button>
+      </div>
+
+      <div style="background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; justify-content: space-between; font-size: 14px; color: oklch(38% 0.02 340);"><span>Subtotal</span><span>R$ {{ subtotalLabel }}</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; color: oklch(38% 0.02 340);"><span>Frete</span><span>{{ freteLabel }}</span></div>
+        <div style="border-top: 1px solid oklch(90% 0.01 340); margin-top: 4px; padding-top: 10px; display: flex; justify-content: space-between; font-weight: 800; font-size: 17px; color: oklch(22% 0.02 340);"><span>Total</span><span>R$ {{ totalLabel }}</span></div>
+      </div>
+      <button style="width: 100%; margin-top: 16px; background: oklch(40% 0.13 145); color: white; border: none; padding: 15px; border-radius: 100px; font-weight: 700; font-size: 15px; cursor: pointer;">Finalizar Compra</button>
+      <p style="text-align: center; font-size: 12px; color: oklch(50% 0.02 340); margin-top: 10px;">Faltam R$ {{ freeShippingRemainingLabel }} para frete grátis (Salvador e Lauro de Freitas)</p>
+    </section>
+  </sc-if>
+
+  <!-- ============ SOBRE NÓS ============ -->
+  <sc-if value="{{ isSobre }}">
+    <section data-screen-label="Sobre Nós" style="padding-bottom: 60px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 72vh; min-height: 460px; max-height: 760px; overflow: hidden;">
+        <image-slot id="sobre-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-05_cps.webp" placeholder="Foto da equipe / cozinha Chef&amp;Nutri"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(20% 0.02 340 / 0.15) 45%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,64px) clamp(20px,4vw,48px) clamp(56px,8vh,90px);">
+          <span style="display: inline-block; color: oklch(85% 0.1 145); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; animation: heroFadeUp 0.8s ease both;">Sobre Nós</span>
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(32px,5.5vw,54px); font-weight: 600; line-height: 1.1; margin: 0; max-width: 640px; animation: heroFadeUp 0.9s ease 0.1s both;">Comida de verdade, com propósito</h1>
+        </div>
+      </div>
+
+      <div style="max-width: 780px; margin: 0 auto; padding: clamp(40px,6vw,64px) clamp(20px,4vw,32px) 0;">
+        <p style="font-size: 17px; line-height: 1.8; color: oklch(30% 0.02 340); margin: 0 0 20px;">A Chef&amp;Nutri nasceu em Lauro de Freitas, na Bahia, para resolver um problema real: encontrar comida gostosa e prática para quem tem restrição a glúten ou lactose.</p>
+        <p style="font-size: 17px; line-height: 1.8; color: oklch(30% 0.02 340); margin: 0;">Hoje produzimos pizzas, salgados e kits congelados 100% livres de glúten e lactose, sem conservantes, com ingredientes naturais selecionados a dedo. Cada receita passa por um processo cuidadoso de congelamento que preserva sabor e nutrientes — para que restrição alimentar nunca signifique abrir mão do prazer de comer bem.</p>
+      </div>
+
+      <div data-reveal="sobreValues" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 1100px; margin: 48px auto 0; padding: 0 clamp(20px,4vw,32px); {{ reveal.sobreValues }}">
+        <sc-for list="{{ aboutValues }}" as="v" hint-placeholder-count="4">
+          <div style="background: oklch(93% 0.05 145); border-radius: 22px 26px 18px 24px; padding: 22px;">
+            <div style="width: 34px; height: 34px; border-radius: 60% 40% 45% 55% / 55% 45% 55% 45%; background: oklch(40% 0.13 145); margin-bottom: 12px;"></div>
+            <div style="font-weight: 700; font-size: 14.5px; color: oklch(22% 0.02 340); margin-bottom: 5px;">{{ v.title }}</div>
+            <div style="font-size: 13px; color: oklch(42% 0.02 340); line-height: 1.55;">{{ v.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-reveal="sobreEditorial" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 0; margin: 64px 0 0; {{ reveal.sobreEditorial }}">
+        <div style="aspect-ratio: 4/3;"><image-slot id="sobre-editorial" shape="rect" placeholder="Detalhe da produção artesanal"></image-slot></div>
+        <div style="padding: clamp(24px,4vw,56px);">
+          <span style="display: inline-block; color: oklch(40% 0.13 145); font-weight: 700; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Nosso jeito de fazer</span>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.2vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 14px; line-height: 1.2;">Do preparo à embalagem, com atenção em cada detalhe</h2>
+          <p style="font-size: 15px; line-height: 1.7; color: oklch(38% 0.02 340); margin: 0 0 20px; max-width: 420px;">Receitas desenvolvidas por nutricionistas e testadas até chegar ao sabor da versão tradicional — sem glúten, sem lactose e sem conservantes.</p>
+          <a href="#" onclick="{{ goDiferenciais }}" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14.5px; color: oklch(40% 0.13 145);">Conheça nossos diferenciais →</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ DIFERENCIAIS ============ -->
+  <sc-if value="{{ isDiferenciais }}">
+    <section data-screen-label="Nossos Diferenciais" style="padding-bottom: 60px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 56vh; min-height: 380px; max-height: 620px; overflow: hidden;">
+        <image-slot id="diferenciais-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/baner-site-chefnutri-1.png-_cps-scaled.webp" placeholder="Ingredientes selecionados"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.4) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,64px) clamp(20px,4vw,48px) clamp(48px,7vh,72px);">
+          <span style="display: inline-block; color: oklch(85% 0.1 145); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; animation: heroFadeUp 0.8s ease both;">Por que Chef&amp;Nutri</span>
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(30px,5vw,48px); font-weight: 600; line-height: 1.1; margin: 0; max-width: 620px; animation: heroFadeUp 0.9s ease 0.1s both;">Nossos Diferenciais</h1>
+        </div>
+      </div>
+
+      <div data-reveal="difGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; max-width: 1100px; margin: 56px auto 0; padding: 0 clamp(20px,4vw,32px); {{ reveal.difGrid }}">
+        <sc-for list="{{ diferenciais }}" as="d" hint-placeholder-count="6">
+          <div style="display: flex; gap: 16px; background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 18px; padding: 22px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 14px 28px oklch(20% 0.02 340 / 0.1);">
+            <div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: oklch(93% 0.05 145); display: flex; align-items: center; justify-content: center;">
+              <div style="width: 16px; height: 16px; background: oklch(40% 0.13 145); border-radius: {{ d.shape }};"></div>
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 15.5px; color: oklch(22% 0.02 340); margin-bottom: 5px;">{{ d.title }}</div>
+              <div style="font-size: 13.5px; color: oklch(42% 0.02 340); line-height: 1.6;">{{ d.text }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-reveal="difEditorial" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 0; margin: 64px 0 0; {{ reveal.difEditorial }}">
+        <div style="padding: clamp(24px,4vw,56px); order: 2;">
+          <span style="display: inline-block; color: oklch(40% 0.13 145); font-weight: 700; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;">Qualidade de ponta a ponta</span>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,3.2vw,32px); font-weight: 700; color: oklch(22% 0.02 340); margin: 0 0 14px; line-height: 1.2;">Sabor de verdade, sem restrições</h2>
+          <p style="font-size: 15px; line-height: 1.7; color: oklch(38% 0.02 340); margin: 0 0 24px; max-width: 420px;">Do ingrediente à embalagem, cada etapa é pensada para levar sabor e segurança alimentar até você.</p>
+          <button onclick="{{ goPizzas }}" style="background: oklch(40% 0.13 145); color: white; border: none; padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 14.5px; cursor: pointer;" style-hover="background: oklch(32% 0.13 145);">Ver Produtos</button>
+        </div>
+        <div style="aspect-ratio: 4/3; order: 1;"><image-slot id="dif-editorial" shape="rect" placeholder="Pizza pronta sem glúten"></image-slot></div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ SEM GLÚTEN E SEM LACTOSE ============ -->
+  <sc-if value="{{ isSemGluten }}">
+    <section data-screen-label="Sem Gluten e Sem Lactose" style="padding-bottom: 60px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 62vh; min-height: 420px; max-height: 680px; overflow: hidden;">
+        <image-slot id="semgluten-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-04_cps.webp" placeholder="Foto de ingredientes naturais"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,64px) clamp(20px,4vw,48px) clamp(48px,7vh,72px);">
+          <span style="display: inline-block; color: oklch(85% 0.1 145); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; animation: heroFadeUp 0.8s ease both;">Livre de restrições</span>
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(28px,5vw,48px); font-weight: 600; line-height: 1.1; margin: 0; max-width: 620px; animation: heroFadeUp 0.9s ease 0.1s both;">Sem Glúten e Sem Lactose</h1>
+        </div>
+      </div>
+
+      <div style="max-width: 720px; margin: 0 auto; padding: clamp(40px,6vw,64px) clamp(20px,4vw,32px) 0;">
+        <p style="font-size: 17px; line-height: 1.8; color: oklch(30% 0.02 340); margin: 0 0 20px;">Todos os produtos Chef&amp;Nutri são formulados, produzidos e embalados livres de glúten e de lactose. Isso significa ingredientes cuidadosamente selecionados e uma linha de produção dedicada, sem risco de contaminação cruzada.</p>
+        <p style="font-size: 17px; line-height: 1.8; color: oklch(30% 0.02 340); margin: 0;">Entendemos que restrição alimentar não pode ser sinônimo de comida sem graça — por isso cada receita é testada até chegar ao sabor de uma pizza ou salgado tradicional, sem o glúten e sem a lactose.</p>
+      </div>
+
+      <div data-reveal="glutenPoints" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 900px; margin: 48px auto 0; padding: 0 clamp(20px,4vw,32px); {{ reveal.glutenPoints }}">
+        <sc-for list="{{ glutenPoints }}" as="g" hint-placeholder-count="3">
+          <div style="border: 1px solid oklch(90% 0.01 340); border-radius: 18px; padding: 20px; background: white;">
+            <div style="font-weight: 700; font-size: 14.5px; color: oklch(22% 0.02 340); margin-bottom: 6px;">{{ g.title }}</div>
+            <div style="font-size: 13px; color: oklch(42% 0.02 340); line-height: 1.55;">{{ g.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <button onclick="{{ goPizzas }}" style="background: oklch(40% 0.13 145); color: white; border: none; padding: 15px 30px; border-radius: 100px; font-weight: 700; font-size: 14.5px; cursor: pointer;" style-hover="background: oklch(32% 0.13 145);">Ver Produtos Sem Glúten e Sem Lactose</button>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ BLOG LIST ============ -->
+  <sc-if value="{{ isBlog }}">
+    <section data-screen-label="Nutricao em Palavras" style="padding-bottom: 48px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 46vh; min-height: 320px; max-height: 480px; overflow: hidden;">
+        <image-slot id="blog-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-03_cps.webp" placeholder="Alimentação saudável"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,56px) clamp(20px,4vw,48px) clamp(36px,6vh,56px);">
+          <span style="display: inline-block; color: oklch(85% 0.1 145); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Blog</span>
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(28px,4.5vw,44px); font-weight: 600; margin: 0 0 8px;">Nutrição em Palavras</h1>
+          <p style="color: oklch(94% 0.01 60); font-size: 15px; margin: 0;">Dicas e matérias sobre alimentação saudável.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 1100px; margin: 48px auto 0; padding: 0 clamp(16px,4vw,32px);">
+        <sc-for list="{{ blogPosts }}" as="post" hint-placeholder-count="3">
+          <div onclick="{{ post.onClick }}" style="cursor: pointer; background: white; border-radius: 16px; overflow: hidden; border: 1px solid oklch(92% 0.01 340);">
+            <div style="aspect-ratio: 16/9;"><image-slot id="{{ post.imgId }}-list" shape="rect" placeholder="Imagem do post"></image-slot></div>
+            <div style="padding: 16px;">
+              <div style="font-size: 11.5px; color: oklch(50% 0.02 340); margin-bottom: 8px;">{{ post.date }}</div>
+              <div style="font-weight: 700; font-size: 15.5px; color: oklch(22% 0.02 340); margin-bottom: 8px; line-height: 1.35;">{{ post.title }}</div>
+              <div style="font-size: 13px; color: oklch(42% 0.02 340); line-height: 1.5;">{{ post.excerpt }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ BLOG POST ============ -->
+  <sc-if value="{{ isPost }}">
+    <section data-screen-label="Post do blog" style="padding-bottom: 48px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 52vh; min-height: 360px; max-height: 560px; overflow: hidden;">
+        <image-slot id="{{ currentPost.imgId }}-full" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-05_cps.webp" placeholder="Imagem do post"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px,5vw,56px) clamp(20px,4vw,48px) clamp(36px,6vh,56px);">
+          <div style="font-size: 12.5px; color: oklch(85% 0.1 145); font-weight: 700; margin-bottom: 10px;">{{ currentPost.date }}</div>
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(24px,4vw,40px); font-weight: 600; margin: 0; max-width: 720px; line-height: 1.2;">{{ currentPost.title }}</h1>
+        </div>
+      </div>
+      <div style="padding: 40px clamp(16px,4vw,32px) 0; max-width: 680px; margin: 0 auto;">
+        <a href="#" onclick="{{ goBlog }}" style="font-size: 13px; font-weight: 700; color: oklch(45% 0.02 340);">← Voltar para o blog</a>
+        <div style="font-size: 16px; line-height: 1.85; color: oklch(30% 0.02 340); white-space: pre-line; margin-top: 24px;">{{ currentPost.body }}</div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ CONTATO ============ -->
+  <sc-if value="{{ isContato }}">
+    <section data-screen-label="Contato" style="padding-bottom: 48px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 40vh; min-height: 280px; max-height: 420px; overflow: hidden;">
+        <image-slot id="contato-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/baner-site-chefnutri-1.png-_cps-scaled.webp" placeholder="Cozinha Chef&amp;Nutri"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; align-items: flex-end; padding: clamp(24px,5vw,48px);">
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(28px,4.5vw,44px); font-weight: 600; margin: 0;">Contato</h1>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1000px; margin: 48px auto 0; padding: 0 clamp(16px,4vw,32px);">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 18px;">
+            <div style="font-weight: 700; font-size: 13.5px; color: oklch(22% 0.02 340); margin-bottom: 6px;">WhatsApp</div>
+            <a href="https://api.whatsapp.com/send?phone=5571996115102" style="font-size: 15px; font-weight: 700;">(71) 9 9611-5102</a>
+          </div>
+          <div style="background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 18px;">
+            <div style="font-weight: 700; font-size: 13.5px; color: oklch(22% 0.02 340); margin-bottom: 6px;">E-mail</div>
+            <a href="mailto:atendimento@chefenutri.com.br" style="font-size: 15px; font-weight: 700;">atendimento@chefenutri.com.br</a>
+          </div>
+          <div style="background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 18px;">
+            <div style="font-weight: 700; font-size: 13.5px; color: oklch(22% 0.02 340); margin-bottom: 6px;">Endereço</div>
+            <div style="font-size: 14px; color: oklch(32% 0.02 340); line-height: 1.5;">Rua Itagibá, 110, Galpão 9<br />Lauro de Freitas / BA</div>
+          </div>
+        </div>
+        <form style="background: white; border: 1px solid oklch(92% 0.01 340); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;" onsubmit="{{ preventSubmit }}">
+          <input placeholder="Nome" style="padding: 12px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 340); font-size: 14px;" />
+          <input placeholder="E-mail" style="padding: 12px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 340); font-size: 14px;" />
+          <textarea placeholder="Mensagem" rows="4" style="padding: 12px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 340); font-size: 14px; resize: vertical; font-family: inherit;"></textarea>
+          <button style="background: oklch(40% 0.13 145); color: white; border: none; padding: 13px; border-radius: 100px; font-weight: 700; font-size: 14.5px; cursor: pointer;">Enviar Mensagem</button>
+        </form>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ FAQ ============ -->
+  <sc-if value="{{ isFaq }}">
+    <section data-screen-label="FAQ" style="padding-bottom: 48px;">
+      <div style="width: 100vw; margin-left: calc(50% - 50vw); position: relative; height: 36vh; min-height: 260px; max-height: 380px; overflow: hidden;">
+        <image-slot id="faq-hero" shape="rect" style="position: absolute; inset: 0; z-index: 1;" src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-04_cps.webp" placeholder="Perguntas frequentes"></image-slot>
+        <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, oklch(20% 0.02 340 / 0.35) 0%, oklch(15% 0.05 145 / 0.85) 100%); display: flex; align-items: flex-end; padding: clamp(24px,5vw,48px);">
+          <h1 style="font-family: 'Playfair Display', serif; font-style: italic; color: white; font-size: clamp(26px,4vw,40px); font-weight: 600; margin: 0;">Perguntas Frequentes</h1>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; max-width: 760px; margin: 40px auto 0; padding: 0 clamp(16px,4vw,32px);">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border-bottom: 1px solid oklch(90% 0.01 340);">
+            <button onclick="{{ f.onClick }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: none; border: none; padding: 16px 0; cursor: pointer; text-align: left;">
+              <span style="font-weight: 700; font-size: 14.5px; color: oklch(22% 0.02 340);">{{ f.q }}</span>
+              <span style="font-size: 18px; color: oklch(40% 0.13 145); font-weight: 700; flex: none;">{{ f.symbol }}</span>
+            </button>
+            <sc-if value="{{ f.isOpen }}">
+              <div style="padding: 0 0 18px; font-size: 13.5px; line-height: 1.7; color: oklch(38% 0.02 340);">{{ f.a }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ PRIVACIDADE ============ -->
+  <sc-if value="{{ isPrivacidade }}">
+    <section data-screen-label="Politica de Privacidade" style="padding: 24px clamp(16px,4vw,32px) 48px; max-width: 720px;">
+      <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(22px,4vw,30px); font-weight: 800; color: oklch(22% 0.02 340); margin: 0 0 20px;">Política de Privacidade &amp; Cookies</h1>
+      <sc-for list="{{ privacySections }}" as="s" hint-placeholder-count="5">
+        <div style="margin-bottom: 22px;">
+          <div style="font-weight: 700; font-size: 15px; color: oklch(22% 0.02 340); margin-bottom: 6px;">{{ s.title }}</div>
+          <div style="font-size: 14px; line-height: 1.7; color: oklch(35% 0.02 340);">{{ s.text }}</div>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: oklch(20% 0.02 340); color: oklch(90% 0.01 60); padding: 40px clamp(16px,4vw,32px) 24px; margin-top: 12px;">
+    <div style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 22px; color: white; margin-bottom: 16px;">Chef<span style="color: oklch(70% 0.15 145);">&amp;</span>Nutri</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; margin-bottom: 28px;">
+      <div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: oklch(65% 0.01 60); margin-bottom: 12px;">INSTITUCIONAL</div>
+        <a href="#" onclick="{{ goSobre }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">Sobre Nós</a>
+        <a href="#" onclick="{{ goDiferenciais }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">Nossos Diferenciais</a>
+        <a href="#" onclick="{{ goSemGluten }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">Sem Glúten e Sem Lactose</a>
+        <a href="#" onclick="{{ goBlog }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60);">Nutrição em Palavras</a>
+      </div>
+      <div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: oklch(65% 0.01 60); margin-bottom: 12px;">ACESSO RÁPIDO</div>
+        <a href="#" onclick="{{ goContato }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">Contato</a>
+        <a href="#" onclick="{{ goFaq }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">Perguntas Frequentes</a>
+        <a href="#" onclick="{{ goPrivacidade }}" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60);">Política de Privacidade &amp; Cookies</a>
+      </div>
+      <div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: oklch(65% 0.01 60); margin-bottom: 12px;">CONTATO</div>
+        <a href="https://api.whatsapp.com/send?phone=5571996115102" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">(71) 9 9611-5102</a>
+        <a href="mailto:atendimento@chefenutri.com.br" style="display: block; font-size: 13.5px; color: oklch(85% 0.01 60); margin-bottom: 10px;">atendimento@chefenutri.com.br</a>
+        <div style="font-size: 13.5px; color: oklch(85% 0.01 60);">Rua Itagibá, 110, Galpão 9<br />Lauro de Freitas / BA</div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid oklch(30% 0.02 340); padding-top: 16px; font-size: 11.5px; color: oklch(55% 0.01 60);">CNPJ: 30.776.986/0001-57 · Chef&amp;Nutri Ltda. © 2026. Todos os direitos reservados.</div>
+  </footer>
+
+  <a href="https://api.whatsapp.com/send?phone=5571996115102" style="position: fixed; bottom: 20px; right: 20px; width: 54px; height: 54px; border-radius: 50%; background: oklch(52% 0.14 145); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px oklch(20% 0.02 340 / 0.3); z-index: 30;">
+    <div style="width: 24px; height: 24px; border-radius: 50% 50% 50% 4px; background: white;"></div>
+  </a>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PRODUCTS = [
+  { id: 'frango-catupiry', name: 'Pizza de Frango C/ Creme Artesanal', size: '120 g', price: 17.99, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pz-frango',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2024/10/15232050325-pizza-de-frango-com-catupiry-artesanal-120g.png',
+    desc: 'Massa fina artesanal coberta com frango desfiado e creme de castanha de caju cremoso — sem glúten, sem lactose e livre de contaminação cruzada.' },
+  { id: 'mussarela', name: 'Pizza Mussarela', size: '120 g', price: 17.99, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pz-mussarela',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2024/10/15232050133-pizza-mussarela-100g.png',
+    desc: 'A clássica: muito queijo vegetal sobre massa levinha, assada até dourar — sem glúten e sem lactose.' },
+  { id: 'calabresa', name: 'Pizza Tipo Calabresa Moída', size: '110 g', price: 17.40, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pz-calabresa',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2024/11/15232050957-pizza-calabresa-moida-110g.png',
+    desc: 'Calabresa moída generosa, cebola e orégano sobre massa artesanal sem glúten e sem lactose.' },
+  { id: 'marguerita-pesto', name: 'Pizza Marguerita ao Pesto', size: '120 g', price: 18.50, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pz-marguerita',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2024/11/15235940007-pizza-marguerita-ao-pesto-120g.png',
+    desc: 'Manjericão fresco, molho pesto artesanal e mussarela vegetal sobre massa levinha, sem glúten e sem lactose.' },
+  { id: 'portuguesa', name: 'Pizza Portuguesa', size: '8 fatias', price: 24.90, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pz-portuguesa',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-04_cps.webp',
+    desc: 'Presunto, ovos, cebola, azeitona e mussarela vegetal — a portuguesa clássica em versão funcional, sem glúten e sem lactose, dividida em 8 fatias generosas para compartilhar.' },
+];
+
+const OTHER_BEST_SELLERS = [
+  { id: 'mini-coxinha', name: 'Mini Coxinha de Aipim Com Frango', size: 'unid.', price: 33.46, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'coxinha',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2026/04/15235942451-minicoxinha-de-aipim-com-frango.png',
+    desc: 'Mini coxinhas de aipim recheadas com frango desfiado, sem glúten e sem lactose.' },
+  { id: 'tortinha-frango', name: 'Tortinha de Frango', size: 'low carb', price: 28.25, tags: ['Sem Glúten', 'Low Carb'], imgId: 'tortinha-frango',
+    img: 'https://chefenutri.com.br/wp-content/uploads/2026/05/15235939595-tortinha-de-frango.png',
+    desc: 'Tortinha low carb recheada com frango, massa sem glúten e sem lactose.' },
+];
+
+const HERO_SLIDES = [
+  { imgId: 'hero-1', img: 'https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-03_cps.webp', title: 'Comida funcional, sem glúten e sem lactose', subtitle: 'Congelados artesanais, ingredientes naturais e zero conservantes — prontos em minutos.', cta: 'Ver Pizzas', goto: 'pizzas' },
+  { imgId: 'hero-2', img: 'https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-05_cps.webp', title: 'Feito com ingredientes naturais', subtitle: 'Receitas testadas até chegar ao sabor de verdade, sem abrir mão da saúde.', cta: 'Nossos Diferenciais', goto: 'diferenciais' },
+  { imgId: 'hero-3', img: 'https://chefenutri.com.br/wp-content/uploads/2024/04/baner-site-chefnutri-1.png-_cps-scaled.webp', title: 'Sem Glúten e Sem Lactose', subtitle: 'Linha de produção dedicada, zero contaminação cruzada.', cta: 'Saiba Mais', goto: 'semGluten' },
+];
+
+const SALGADOS = [
+  { id: 'tortinha-sertaneja', name: 'Tortinha Sertaneja', size: '165 g', price: 30.83, tags: ['Sem Glúten', 'Low Carb'], imgId: 'tortinha-sertaneja', desc: 'Tortinha low carb sertaneja, massa sem glúten e sem lactose.' },
+  { id: 'quibe-quinoa', name: 'Quibe de Quinoa com Carne', size: '150 g', price: 26.90, tags: ['Sem Glúten'], imgId: 'quibe-quinoa', desc: 'Quibe assado de quinoa com carne, sem glúten e sem lactose.' },
+  { id: 'quiche-alho-poro', name: 'Quiche de Alho Poró e Tofu', size: '150 g', price: 25.65, tags: ['Vegano', 'Sem Glúten'], imgId: 'quiche-alho-poro', desc: 'Quiche vegano de alho poró e tofu, massa sem glúten.' },
+  { id: 'pastel-frango', name: 'Pastel de Forno com Frango', size: '120 g', price: 24.80, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'pastel-frango', desc: 'Pastel assado recheado com frango, sem glúten e sem lactose.' },
+  { id: 'quiche-espinafre', name: 'Quiche de Espinafre', size: 'low carb', price: 22.35, tags: ['Sem Glúten', 'Low Carb'], imgId: 'quiche-espinafre', desc: 'Quiche low carb de espinafre, sem glúten e sem lactose.' },
+  { id: 'coxinha-aipim', name: 'Coxinha de Aipim Com Frango', size: 'unid.', price: 22.15, tags: ['Sem Glúten', 'Sem Lactose'], imgId: 'coxinha-aipim', desc: 'Coxinha de aipim recheada com frango, sem glúten e sem lactose.' },
+];
+
+const VEGETARIANOS = [
+  { id: 'paozinho-aipim', name: 'Pãozinho de Aipim com Ervas', size: 'unid.', price: 20.70, tags: ['Vegetariano', 'Sem Glúten'], imgId: 'paozinho-aipim', desc: 'Pãozinho de aipim com ervas frescas, vegetariano e sem glúten.' },
+];
+
+const VEGANOS = [
+  VEGETARIANOS[0],
+  { id: 'massa-pizza', name: 'Massa Pré-Assada para Pizza', size: '120 g', price: 18.90, tags: ['Vegano', 'Sem Glúten'], imgId: 'massa-pizza', desc: 'Massa pré-assada vegana para pizza, sem glúten e sem lactose.' },
+  SALGADOS[2],
+];
+
+const PAES = [VEGETARIANOS[0]];
+
+const FILTER_TAGS = ['Sem Glúten', 'Sem Lactose', 'Vegano', 'Vegetariano', 'Low Carb'];
+
+function allProductsFlat() {
+  const seen = new Set();
+  const out = [];
+  [...PRODUCTS, ...OTHER_BEST_SELLERS, ...SALGADOS, ...VEGETARIANOS, ...VEGANOS, ...PAES].forEach((p) => {
+    if (seen.has(p.id)) return;
+    seen.add(p.id);
+    out.push(p);
+  });
+  return out;
+}
+
+const BLOG_POSTS = [
+  { id: 'imunidade', imgId: 'blog-imunidade', date: '08/05/2021', title: 'Alimentos que melhoram a imunidade',
+    excerpt: 'Conheça alimentos que ajudam a fortalecer as defesas do corpo no dia a dia.',
+    body: 'Manter o sistema imunológico funcionando bem começa no prato. Frutas cítricas, como laranja e acerola, são ricas em vitamina C, um nutriente conhecido por apoiar a produção de células de defesa.\n\nVegetais de folhas verde-escuras, como couve e espinafre, trazem vitamina A e antioxidantes que ajudam a proteger as células do corpo. Já castanhas e semente de girassol fornecem zinco e selênio, minerais associados ao bom funcionamento do sistema imune.\n\nProbióticos naturais, presentes em alimentos fermentados, contribuem para a saúde da microbiota intestinal — hoje reconhecida como parte importante da resposta imunológica.\n\nPequenas mudanças na rotina alimentar, mantidas com consistência, fazem diferença maior do que apostar em um único "alimento milagroso". Priorize variedade, cor no prato e refeições completas.' },
+  { id: 'chocolate', imgId: 'blog-chocolate', date: '07/07/2021', title: 'Chocolate: um grande parceiro para sua saúde',
+    excerpt: 'Em quantidade certa, o chocolate amargo pode ser aliado do bem-estar.',
+    body: 'O chocolate amargo, com alto teor de cacau, concentra flavonoides — compostos com ação antioxidante que têm sido associados à saúde cardiovascular.\n\nO segredo está na moderação e na escolha: prefira versões com maior percentual de cacau e menos açúcar adicionado. Combinado a uma rotina equilibrada, pode ser um pequeno prazer com benefícios reais.' },
+  { id: 'sistema-imunologico', imgId: 'blog-sistema', date: '19/07/2021', title: 'Como a alimentação pode contribuir para o sistema imunológico',
+    excerpt: 'O papel da nutrição na construção de defesas mais fortes.',
+    body: 'A alimentação é uma das bases mais importantes da imunidade. Proteínas de boa qualidade fornecem os blocos necessários para a produção de anticorpos, enquanto gorduras boas, como as encontradas em azeite e peixes, ajudam a controlar processos inflamatórios.\n\nHidratação adequada e sono de qualidade completam o trio essencial ao lado da alimentação. Pequenos hábitos diários, somados, sustentam um corpo mais preparado para se defender.' },
+];
+
+const FAQS = [
+  { q: 'Qual o prazo de validade dos produtos?', a: 'Todos os produtos são congelados e mantêm sua qualidade por até 6 meses no freezer, desde que a embalagem não seja violada. Confira a validade impressa em cada pacote.' },
+  { q: 'Como faço para preparar?', a: 'A maioria dos produtos vai direto do freezer ao forno ou air fryer, sem necessidade de descongelar. O modo de preparo está sempre na embalagem.' },
+  { q: 'Quais formas de pagamento são aceitas?', a: 'Aceitamos cartão de crédito, débito, Pix e boleto bancário no checkout do site.' },
+  { q: 'Qual a área de entrega?', a: 'Entregamos em Salvador e Lauro de Freitas com frete grátis acima de R$200. Para outras regiões, consulte prazos e valores no checkout.' },
+  { q: 'Os produtos contêm glúten ou lactose?', a: 'Não. Todos os produtos Chef&Nutri são 100% sem glúten e sem lactose, produzidos em linha dedicada e livre de contaminação cruzada.' },
+  { q: 'Posso trocar ou devolver um pedido?', a: 'Sim, entre em contato pelo WhatsApp em até 7 dias após o recebimento para solicitar troca ou devolução, conforme o Código de Defesa do Consumidor.' },
+];
+
+const PRIVACY_SECTIONS = [
+  { title: 'Coleta de dados', text: 'Coletamos apenas os dados necessários para processar pedidos, entregas e atendimento: nome, e-mail, telefone, endereço e histórico de compras.' },
+  { title: 'Uso de cookies', text: 'Utilizamos cookies para lembrar itens do carrinho, preferências de navegação e melhorar a performance do site. Você pode gerenciar cookies nas configurações do seu navegador.' },
+  { title: 'Compartilhamento de dados', text: 'Seus dados não são vendidos. Compartilhamos apenas com parceiros essenciais à operação, como transportadoras e processadores de pagamento.' },
+  { title: 'Seus direitos', text: 'Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento pelo e-mail atendimento@chefenutri.com.br.' },
+  { title: 'Contato', text: 'Dúvidas sobre esta política podem ser enviadas para atendimento@chefenutri.com.br ou pelo WhatsApp (71) 9 9611-5102.' },
+];
+
+function fmt(n) { return n.toFixed(2).replace('.', ','); }
+
+class Component extends DCLogic {
+  state = {
+    page: 'home',
+    menuOpen: false,
+    selectedProductId: 'portuguesa',
+    qty: 1,
+    openFaq: null,
+    openAccordion: 0,
+    blogPostId: 'imunidade',
+    cartQty: { portuguesa: 1, 'mini-coxinha': 2 },
+    heroSlide: 0,
+    revealed: {},
+    activeFilterTags: [],
+    sortBy: 'relevancia',
+    mobileFilterOpen: false,
+    quickViewId: null,
+    quickViewQty: 1,
+    searchQuery: '',
+    isDesktop: true,
+  };
+
+  checkDesktop = () => this.setState({ isDesktop: window.innerWidth >= 860 });
+
+  componentDidMount() {
+    this._heroTimer = setInterval(() => {
+      this.setState((s) => ({ heroSlide: (s.heroSlide + 1) % HERO_SLIDES.length }));
+    }, 5000);
+    this._observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('data-reveal');
+          this.setState((s) => ({ revealed: { ...s.revealed, [id]: true } }));
+          this._observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    this.scanReveals();
+    this.checkDesktop();
+    window.addEventListener('resize', this.checkDesktop);
+  }
+  componentWillUnmount() {
+    clearInterval(this._heroTimer);
+    this._observer && this._observer.disconnect();
+    clearTimeout(this._scanTimer);
+    window.removeEventListener('resize', this.checkDesktop);
+  }
+  scanReveals = () => {
+    clearTimeout(this._scanTimer);
+    this._scanTimer = setTimeout(() => {
+      document.querySelectorAll('[data-reveal]').forEach((el) => this._observer.observe(el));
+    }, 120);
+  };
+  reveal = (key) => {
+    const on = !!this.state.revealed[key];
+    return 'opacity:' + (on ? 1 : 0) + ';transform:translateY(' + (on ? 0 : 26) + 'px);transition:opacity 0.7s ease,transform 0.7s ease;';
+  };
+  scrollCarousel = (name, dir) => {
+    const el = document.querySelector('[data-carousel="' + name + '"]');
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.82, behavior: 'smooth' });
+  };
+  nextHero = () => this.setState((s) => ({ heroSlide: (s.heroSlide + 1) % HERO_SLIDES.length }));
+  prevHero = () => this.setState((s) => ({ heroSlide: (s.heroSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length }));
+  goHeroSlide = (i) => this.setState({ heroSlide: i });
+
+  goTo = (page) => { this.setState({ page, menuOpen: false }); this.scanReveals(); };
+  toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  goHome = (e) => { e && e.preventDefault(); this.goTo('home'); };
+  goPizzas = (e) => { e && e.preventDefault(); this.goTo('pizzas'); };
+  goSobre = (e) => { e && e.preventDefault(); this.goTo('sobre'); };
+  goDiferenciais = (e) => { e && e.preventDefault(); this.goTo('diferenciais'); };
+  goSemGluten = (e) => { e && e.preventDefault(); this.goTo('semGluten'); };
+  goBlog = (e) => { e && e.preventDefault(); this.goTo('blog'); };
+  goContato = (e) => { e && e.preventDefault(); this.goTo('contato'); };
+  goFaq = (e) => { e && e.preventDefault(); this.goTo('faq'); };
+  goPrivacidade = (e) => { e && e.preventDefault(); this.goTo('privacidade'); };
+  openCart = () => this.goTo('carrinho');
+  preventSubmit = (e) => e.preventDefault();
+
+  openProduct = (id) => this.setState({ selectedProductId: id, qty: 1, openAccordion: 0, page: 'produto', menuOpen: false, quickViewId: null });
+  openPost = (id) => this.setState({ blogPostId: id, page: 'post', menuOpen: false });
+  toggleFaq = (i) => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }));
+  toggleAccordion = (i) => this.setState((s) => ({ openAccordion: s.openAccordion === i ? null : i }));
+  incQty = () => this.setState((s) => ({ qty: s.qty + 1 }));
+  decQty = () => this.setState((s) => ({ qty: Math.max(1, s.qty - 1) }));
+
+  toggleFilterTag = (tag) => this.setState((s) => ({
+    activeFilterTags: s.activeFilterTags.includes(tag) ? s.activeFilterTags.filter((t) => t !== tag) : [...s.activeFilterTags, tag],
+  }));
+  clearFilters = () => this.setState({ activeFilterTags: [] });
+  setSort = (v) => this.setState({ sortBy: v });
+  openMobileFilter = () => this.setState({ mobileFilterOpen: true });
+  closeMobileFilter = () => this.setState({ mobileFilterOpen: false });
+  openQuickView = (id) => this.setState({ quickViewId: id, quickViewQty: 1 });
+  closeQuickView = () => this.setState({ quickViewId: null });
+  incQVQty = () => this.setState((s) => ({ quickViewQty: s.quickViewQty + 1 }));
+  decQVQty = () => this.setState((s) => ({ quickViewQty: Math.max(1, s.quickViewQty - 1) }));
+  goSearch = (e) => { e && e.preventDefault(); this.setState({ page: 'busca', menuOpen: false }); };
+  updateSearchQuery = (e) => this.setState({ searchQuery: e.target.value });
+  setSortFromEvent = (e) => this.setState({ sortBy: e.target.value });
+  applyFilterSort = (list) => {
+    const tags = this.state.activeFilterTags;
+    let out = tags.length ? list.filter((p) => tags.every((t) => p.tags.includes(t))) : list.slice();
+    if (this.state.sortBy === 'menor-preco') out.sort((a, b) => a.price - b.price);
+    else if (this.state.sortBy === 'maior-preco') out.sort((a, b) => b.price - a.price);
+    else if (this.state.sortBy === 'nome') out.sort((a, b) => a.name.localeCompare(b.name));
+    return out;
+  };
+
+  renderVals() {
+    const s = this.state;
+    const navItems = [
+      { label: 'Início', onClick: this.goHome },
+      { label: 'Pizzas', onClick: this.goPizzas },
+      { label: 'Sobre Nós', onClick: this.goSobre },
+      { label: 'Nossos Diferenciais', onClick: this.goDiferenciais },
+      { label: 'Sem Glúten e Sem Lactose', onClick: this.goSemGluten },
+      { label: 'Nutrição em Palavras', onClick: this.goBlog },
+      { label: 'Perguntas Frequentes', onClick: this.goFaq },
+      { label: 'Contato', onClick: this.goContato },
+    ];
+
+    const withPrice = (p) => ({ ...p, priceLabel: fmt(p.price), onClick: () => this.openProduct(p.id) });
+
+    const allPizzas = PRODUCTS.map(withPrice);
+    const bestSellers = [PRODUCTS[0], PRODUCTS[1], ...OTHER_BEST_SELLERS, PRODUCTS[4]].slice(0, 4).map(withPrice);
+    const salgados = SALGADOS.map(withPrice);
+    const vegetarianosVeganos = [...VEGETARIANOS, ...VEGANOS.filter((v) => v.id !== 'paozinho-aipim')].map(withPrice);
+    const paes = PAES.map(withPrice);
+
+    const heroSlides = HERO_SLIDES.map((h, i) => ({ ...h, opacity: i === s.heroSlide ? 1 : 0, pointerEvents: i === s.heroSlide ? 'auto' : 'none' }));
+    const activeHero = { ...HERO_SLIDES[s.heroSlide], onClick: () => this.goTo(HERO_SLIDES[s.heroSlide].goto) };
+    const heroDots = HERO_SLIDES.map((h, i) => ({
+      onClick: () => this.goHeroSlide(i),
+      size: i === s.heroSlide ? '22px' : '8px',
+      color: i === s.heroSlide ? 'white' : 'oklch(100% 0 0 / 0.5)',
+    }));
+
+    const withCard = (p) => ({ ...p, onQuickView: (e) => { e && e.stopPropagation(); this.openQuickView(p.id); }, onBuyNow: (e) => { e && e.stopPropagation(); this.openQuickView(p.id); } });
+    const filterChips = FILTER_TAGS.map((tag) => {
+      const active = s.activeFilterTags.includes(tag);
+      return {
+        label: tag,
+        onClick: () => this.toggleFilterTag(tag),
+        bg: active ? 'oklch(40% 0.13 145)' : 'white',
+        color: active ? 'white' : 'oklch(30% 0.02 340)',
+        borderColor: active ? 'oklch(40% 0.13 145)' : 'oklch(88% 0.01 340)',
+      };
+    });
+    const hasActiveFilters = s.activeFilterTags.length > 0;
+    const SORT_OPTIONS = [
+      { key: 'relevancia', label: 'Relevância' },
+      { key: 'menor-preco', label: 'Menor preço' },
+      { key: 'maior-preco', label: 'Maior preço' },
+      { key: 'nome', label: 'Nome (A-Z)' },
+    ];
+    const sortOptions = SORT_OPTIONS.map((o) => ({ ...o, onClick: () => this.setSort(o.key), active: s.sortBy === o.key }));
+    const currentSortLabel = (SORT_OPTIONS.find((o) => o.key === s.sortBy) || SORT_OPTIONS[0]).label;
+    const filteredPizzas = this.applyFilterSort(allPizzas).map(withCard);
+
+    const allFlat = allProductsFlat().map(withPrice);
+    const q = s.searchQuery.trim().toLowerCase();
+    const searchMatches = q ? allFlat.filter((p) => p.name.toLowerCase().includes(q) || p.tags.some((t) => t.toLowerCase().includes(q))) : allFlat;
+    const searchResults = this.applyFilterSort(searchMatches).map(withCard);
+    const hasSearchQuery = !!q;
+    const noSearchQuery = !hasSearchQuery;
+    const noSearchResults = searchResults.length === 0;
+
+    const quickViewRaw = s.quickViewId ? allFlat.find((p) => p.id === s.quickViewId) : null;
+    const quickViewProduct = quickViewRaw ? {
+      ...quickViewRaw,
+      qty: s.quickViewQty,
+      totalLabel: fmt(quickViewRaw.price * s.quickViewQty),
+    } : null;
+
+    const selectedProductRaw = PRODUCTS.find((p) => p.id === s.selectedProductId) || PRODUCTS[4];
+    const selectedProduct = withPrice(selectedProductRaw);
+    const relatedPizzas = allPizzas.filter((p) => p.id !== selectedProduct.id).slice(0, 3);
+
+    const accordionsData = [
+      { title: 'Informação Nutricional', content: 'Valores aproximados por fatia (60 g) — substitua pelos valores reais da embalagem:\nValor energético: 145 kcal\nCarboidratos: 18 g\nProteínas: 5 g\nGorduras totais: 6 g\nFibra alimentar: 2 g\nSódio: 210 mg' },
+      { title: 'Ingredientes', content: 'Farinha de arroz, fécula de mandioca, água, azeite de oliva, fermento biológico, sal, e cobertura conforme sabor. Sem glúten, sem lactose e sem conservantes artificiais.' },
+      { title: 'Modo de Preparo', content: 'Leve direto do freezer ao forno pré-aquecido a 220°C por 12-15 minutos, ou ao air fryer a 200°C por 8-10 minutos, até dourar.' },
+    ];
+    const productAccordions = accordionsData.map((a, i) => ({
+      ...a,
+      isOpen: s.openAccordion === i,
+      symbol: s.openAccordion === i ? '−' : '+',
+      onClick: () => this.toggleAccordion(i),
+    }));
+
+    const cartData = [
+      { ...PRODUCTS.find((p) => p.id === 'portuguesa'), qty: s.cartQty.portuguesa },
+      { ...OTHER_BEST_SELLERS.find((p) => p.id === 'mini-coxinha'), qty: s.cartQty['mini-coxinha'] },
+    ];
+    const cartItems = cartData.map((it) => ({ ...it, totalLabel: fmt(it.price * it.qty) }));
+    const cartCount = cartItems.reduce((n, it) => n + it.qty, 0);
+    const subtotal = cartItems.reduce((sum, it) => sum + it.price * it.qty, 0);
+    const frete = subtotal >= 200 ? 0 : 15.9;
+    const total = subtotal + frete;
+
+    const blogPosts = BLOG_POSTS.map((p) => ({ ...p, onClick: () => this.openPost(p.id) }));
+    const currentPost = BLOG_POSTS.find((p) => p.id === s.blogPostId) || BLOG_POSTS[0];
+
+    const faqs = FAQS.map((f, i) => ({ ...f, isOpen: s.openFaq === i, symbol: s.openFaq === i ? '−' : '+', onClick: () => this.toggleFaq(i) }));
+
+    const benefits = [
+      { text: 'Alimentos funcionais congelados, sem conservantes', shape: '50%' },
+      { text: '100% sem glúten e sem lactose', shape: '4px' },
+      { text: '10% OFF na 1ª compra: cupom NUTRI10', shape: '50%' },
+      { text: 'Frete grátis acima de R$200 (Salvador e Lauro de Freitas)', shape: '4px' },
+    ];
+
+    const aboutValues = [
+      { title: 'Ingredientes naturais', text: 'Selecionamos cada ingrediente pensando em sabor e qualidade nutricional.' },
+      { title: 'Sem conservantes', text: 'Congelamento cuidadoso preserva o alimento sem químicos adicionados.' },
+      { title: 'Zero contaminação cruzada', text: 'Linha de produção dedicada a receitas sem glúten e sem lactose.' },
+      { title: 'Feito na Bahia', text: 'Produção local em Lauro de Freitas, com entrega para toda a região.' },
+    ];
+
+    const diferenciais = [
+      { title: 'Sem Glúten e Sem Lactose', text: 'Todos os produtos são livres de glúten e lactose, sem risco de contaminação cruzada.', shape: '50%' },
+      { title: 'Sem conservantes artificiais', text: 'Ingredientes naturais e processo de congelamento que preserva frescor sem químicos.', shape: '4px' },
+      { title: 'Congelamento que preserva nutrientes', text: 'Tecnologia de congelamento rápido mantém sabor e valor nutricional.', shape: '50%' },
+      { title: 'Cupom de boas-vindas', text: '10% de desconto na primeira compra acima de R$200 com o cupom NUTRI10.', shape: '4px' },
+      { title: 'Entrega grátis local', text: 'Frete grátis para compras acima de R$200 em Salvador e Lauro de Freitas.', shape: '50%' },
+      { title: 'Receitas testadas', text: 'Sabor de comida tradicional, sem abrir mão das restrições alimentares.', shape: '4px' },
+    ];
+
+    const glutenPoints = [
+      { title: 'Linha dedicada', text: 'Produção exclusiva para itens sem glúten e sem lactose.' },
+      { title: 'Ingredientes selecionados', text: 'Cada fornecedor é avaliado quanto à ausência de glúten e lactose.' },
+      { title: 'Sabor de verdade', text: 'Receitas testadas até chegar ao sabor da versão tradicional.' },
+    ];
+
+    return {
+      isHome: s.page === 'home', isPizzas: s.page === 'pizzas', isProduto: s.page === 'produto',
+      isCarrinho: s.page === 'carrinho', isSobre: s.page === 'sobre', isDiferenciais: s.page === 'diferenciais',
+      isSemGluten: s.page === 'semGluten', isBlog: s.page === 'blog', isPost: s.page === 'post',
+      isContato: s.page === 'contato', isFaq: s.page === 'faq', isPrivacidade: s.page === 'privacidade',
+      menuOpen: s.menuOpen, qty: s.qty,
+      toggleMenu: this.toggleMenu, goHome: this.goHome, goPizzas: this.goPizzas, goSobre: this.goSobre,
+      goDiferenciais: this.goDiferenciais, goSemGluten: this.goSemGluten, goBlog: this.goBlog,
+      goContato: this.goContato, goFaq: this.goFaq, goPrivacidade: this.goPrivacidade, openCart: this.openCart,
+      preventSubmit: this.preventSubmit, incQty: this.incQty, decQty: this.decQty,
+      navItems, benefits, bestSellers, salgados, vegetarianosVeganos, paes, blogPosts, filteredPizzas,
+      filterChips, hasActiveFilters, clearFilters: this.clearFilters, sortOptions, currentSortLabel,
+      mobileFilterOpen: s.mobileFilterOpen, openMobileFilter: this.openMobileFilter, closeMobileFilter: this.closeMobileFilter,
+      resultCountLabel: filteredPizzas.length + (filteredPizzas.length === 1 ? ' pizza encontrada' : ' pizzas encontradas'),
+      noPizzaResults: filteredPizzas.length === 0,
+      isBusca: s.page === 'busca', goSearch: this.goSearch, searchQuery: s.searchQuery, updateSearchQuery: this.updateSearchQuery,
+      searchResults, hasSearchQuery, noSearchQuery, noSearchResults, searchResultCountLabel: searchResults.length + (searchResults.length === 1 ? ' resultado encontrado' : ' resultados encontrados'),
+      quickViewProduct, closeQuickView: this.closeQuickView, incQVQty: this.incQVQty, decQVQty: this.decQVQty,
+      setSortFromEvent: this.setSortFromEvent,
+      desktopFilterBarDisplay: s.isDesktop ? 'flex' : 'none',
+      mobileFilterBtnDisplay: s.isDesktop ? 'none' : 'flex',
+      heroSlides, activeHero, heroDots, nextHero: this.nextHero, prevHero: this.prevHero,
+      reveal: {
+        benefits: this.reveal('benefits'), shelfBest: this.reveal('shelfBest'), editorial1: this.reveal('editorial1'),
+        shelfSalgados: this.reveal('shelfSalgados'), editorial2: this.reveal('editorial2'), shelfVegVeg: this.reveal('shelfVegVeg'),
+        shelfPaes: this.reveal('shelfPaes'), blog: this.reveal('blog'), newsletter: this.reveal('newsletter'),
+        sobreValues: this.reveal('sobreValues'), sobreEditorial: this.reveal('sobreEditorial'),
+        difGrid: this.reveal('difGrid'), difEditorial: this.reveal('difEditorial'),
+        glutenPoints: this.reveal('glutenPoints'),
+      },
+      bestPrev: () => this.scrollCarousel('bestSellers', -1), bestNext: () => this.scrollCarousel('bestSellers', 1),
+      salgadosPrev: () => this.scrollCarousel('salgados', -1), salgadosNext: () => this.scrollCarousel('salgados', 1),
+      vegVegPrev: () => this.scrollCarousel('vegVeg', -1), vegVegNext: () => this.scrollCarousel('vegVeg', 1),
+      paesPrev: () => this.scrollCarousel('paes', -1), paesNext: () => this.scrollCarousel('paes', 1),
+      selectedProduct, relatedPizzas, productAccordions,
+      cartItems, cartCount, subtotalLabel: fmt(subtotal),
+      freteLabel: frete === 0 ? 'Grátis' : 'R$ ' + fmt(frete),
+      totalLabel: fmt(total), freeShippingRemainingLabel: fmt(Math.max(0, 200 - subtotal)),
+      aboutValues, diferenciais, glutenPoints, currentPost, faqs, privacySections: PRIVACY_SECTIONS,
+    };
+  }
+}
+</script>
+</body>
+</html>

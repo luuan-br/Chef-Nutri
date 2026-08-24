@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chef&amp;Nutri — Comida funcional sem glúten e sem lactose</title>
+<meta name="description" content="Pizzas, salgados e pães congelados 100% sem glúten e sem lactose, feitos na Bahia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page-shell">
+<div class="announce-bar">10% OFF na primeira compra acima de R$200 com o cupom <strong>NUTRI10</strong> · Frete grátis para Salvador e Lauro de Freitas</div>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">
+      <span class="menu-btn__bar"></span><span class="menu-btn__bar"></span><span class="menu-btn__bar"></span>
+    </button>
+    <a href="index.html" class="brand-logo" aria-label="Chef&amp;Nutri">
+      <img src="uploads/logo-chef-e-nutri-branco.png.webp" alt="Chef&amp;Nutri">
+    </a>
+    <div class="header-actions">
+      <a href="busca.html" class="icon-btn" aria-label="Buscar">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </a>
+      <a href="carrinho.html" class="icon-btn" aria-label="Carrinho">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" data-cart-count>3</span>
+      </a>
+    </div>
+  </div>
+</header>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-brand">Chef&amp;Nutri</span>
+    <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
+  </div>
+      <a href="index.html" class="drawer-link">Início</a>
+      <a href="pizzas.html" class="drawer-link">Pizzas</a>
+      <a href="sobre.html" class="drawer-link">Sobre Nós</a>
+      <a href="diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
+      <a href="sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
+      <a href="blog.html" class="drawer-link">Nutrição em Palavras</a>
+      <a href="faq.html" class="drawer-link">Perguntas Frequentes</a>
+      <a href="contato.html" class="drawer-link">Contato</a>
+  <div class="drawer-promo">
+    <div class="drawer-promo__label">Fale com a gente</div>
+    <a href="https://api.whatsapp.com/send?phone=5571996115102">(71) 9 9611-5102</a>
+  </div>
+</nav>
+<main class="container">
+  <section>
+    <div class="hero" id="hero">
+      <div class="hero-slide is-active" data-hero-slide data-goto="pizzas.html">
+        <div class="hero-slide__frame"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050133-pizza-mussarela-100g.png" alt="Comida funcional, sem glúten e sem lactose" loading="lazy"></div>
+      </div>
+      <div class="hero-slide" data-hero-slide data-goto="diferenciais.html">
+        <div class="hero-slide__frame"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050325-pizza-de-frango-com-catupiry-artesanal-120g.png" alt="Feito com ingredientes naturais" loading="lazy"></div>
+      </div>
+      <div class="hero-slide" data-hero-slide data-goto="sem-gluten.html">
+        <div class="hero-slide__frame"><img src="https://chefenutri.com.br/wp-content/uploads/2026/04/15235942451-minicoxinha-de-aipim-com-frango.png" alt="Sem Glúten e Sem Lactose" loading="lazy"></div>
+      </div>
+      <div class="hero-blob"></div>
+      <div class="hero-scrim">
+        <div class="hero-copy-wrap">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">Chef&amp;Nutri</span>
+            <h1 class="hero-title" id="heroTitle">Comida funcional, sem glúten e sem lactose</h1>
+            <p class="hero-subtitle" id="heroSubtitle">Congelados artesanais, ingredientes naturais e zero conservantes — prontos em minutos.</p>
+            <button class="btn-primary hero-cta" type="button" id="heroCta">Ver Pizzas</button>
+          </div>
+        </div>
+      </div>
+      <button class="hero-arrow hero-arrow--prev" type="button" id="heroPrev" aria-label="Anterior">‹</button>
+      <button class="hero-arrow hero-arrow--next" type="button" id="heroNext" aria-label="Próximo">›</button>
+      <div class="hero-dots">
+        <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <div data-reveal class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="19.07" y2="4.93"/></svg></div>
+        <div class="benefit-text">Alimentos funcionais congelados, sem conservantes</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="benefit-text">100% sem glúten e sem lactose</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+        <div class="benefit-text">10% OFF na 1ª compra: cupom NUTRI10</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v5h-7z"/><circle cx="6" cy="19" r="2"/><circle cx="17.5" cy="19" r="2"/></svg></div>
+        <div class="benefit-text">Frete grátis acima de R$200 (Salvador e Lauro de Freitas)</div>
+      </div>
+    </div>
+
+      <div data-reveal style="padding: 8px clamp(16px,4vw,32px) 8px;" class="shelf">
+        <div class="shelf-head">
+          <h2 class="section-title">Mais Vendidos</h2>
+          <div class="shelf-actions">
+            <a href="pizzas.html" class="shelf-link">Ver tudo →</a>
+            <button class="shelf-nav-btn" type="button" data-carousel-prev="bestSellers" aria-label="Anterior">‹</button>
+            <button class="shelf-nav-btn" type="button" data-carousel-next="bestSellers" aria-label="Próximo">›</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel="bestSellers">
+          <div class="product-card" data-product="frango-catupiry">
+            <a href="produto/frango-catupiry.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050325-pizza-de-frango-com-catupiry-artesanal-120g.png" alt="Pizza de Frango C/ Creme Artesanal" loading="lazy">
+              <button class="quickview-btn" type="button" data-quickview="frango-catupiry" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/frango-catupiry.html"><div class="product-card__name">Pizza de Frango C/ Creme Artesanal</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
+              <div class="product-card__price">R$ 17,99</div>
+              <button class="buy-now-btn" type="button" data-quickview="frango-catupiry">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="mussarela">
+            <a href="produto/mussarela.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050133-pizza-mussarela-100g.png" alt="Pizza Mussarela" loading="lazy">
+              <button class="quickview-btn" type="button" data-quickview="mussarela" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/mussarela.html"><div class="product-card__name">Pizza Mussarela</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
+              <div class="product-card__price">R$ 17,99</div>
+              <button class="buy-now-btn" type="button" data-quickview="mussarela">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="mini-coxinha">
+            <a href="produto/mini-coxinha.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2026/04/15235942451-minicoxinha-de-aipim-com-frango.png" alt="Mini Coxinha de Aipim Com Frango" loading="lazy">
+              <button class="quickview-btn" type="button" data-quickview="mini-coxinha" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/mini-coxinha.html"><div class="product-card__name">Mini Coxinha de Aipim Com Frango</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
+              <div class="product-card__price">R$ 33,46</div>
+              <button class="buy-now-btn" type="button" data-quickview="mini-coxinha">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="tortinha-frango">
+            <a href="produto/tortinha-frango.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2026/05/15235939595-tortinha-de-frango.png" alt="Tortinha de Frango" loading="lazy">
+              <button class="quickview-btn" type="button" data-quickview="tortinha-frango" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/tortinha-frango.html"><div class="product-card__name">Tortinha de Frango</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Low Carb</span></div>
+              <div class="product-card__price">R$ 28,25</div>
+              <button class="buy-now-btn" type="button" data-quickview="tortinha-frango">Comprar Agora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div data-reveal class="editorial">
+      <div class="editorial__image"><div class="img-placeholder">Ingredientes naturais sobre a bancada</div></div>
+      <div class="editorial__body">
+        <span class="editorial__eyebrow">Nossa cozinha</span>
+        <h2 class="editorial__title">Sem glúten, sem lactose, sem abrir mão do sabor</h2>
+        <p class="editorial__text">Cada receita é testada até chegar ao sabor da versão tradicional — só que mais leve, mais natural, sem conservantes.</p>
+        <a href="diferenciais.html" class="editorial__link">Conheça nossos diferenciais →</a>
+      </div>
+    </div>
+
+      <div data-reveal style="padding: 8px clamp(16px,4vw,32px) 8px;" class="shelf">
+        <div class="shelf-head">
+          <h2 class="section-title">Salgados</h2>
+          <div class="shelf-actions">
+            <a href="pizzas.html" class="shelf-link">Ver tudo →</a>
+            <button class="shelf-nav-btn" type="button" data-carousel-prev="salgados" aria-label="Anterior">‹</button>
+            <button class="shelf-nav-btn" type="button" data-carousel-next="salgados" aria-label="Próximo">›</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel="salgados">
+          <div class="product-card" data-product="tortinha-sertaneja">
+            <a href="produto/tortinha-sertaneja.html" class="product-card__image"><div class="img-placeholder">Tortinha Sertaneja</div>
+              <button class="quickview-btn" type="button" data-quickview="tortinha-sertaneja" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/tortinha-sertaneja.html"><div class="product-card__name">Tortinha Sertaneja</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Low Carb</span></div>
+              <div class="product-card__price">R$ 30,83</div>
+              <button class="buy-now-btn" type="button" data-quickview="tortinha-sertaneja">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="quibe-quinoa">
+            <a href="produto/quibe-quinoa.html" class="product-card__image"><div class="img-placeholder">Quibe de Quinoa com Carne</div>
+              <button class="quickview-btn" type="button" data-quickview="quibe-quinoa" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/quibe-quinoa.html"><div class="product-card__name">Quibe de Quinoa com Carne</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 26,90</div>
+              <button class="buy-now-btn" type="button" data-quickview="quibe-quinoa">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="quiche-alho-poro">
+            <a href="produto/quiche-alho-poro.html" class="product-card__image"><div class="img-placeholder">Quiche de Alho Poró e Tofu</div>
+              <button class="quickview-btn" type="button" data-quickview="quiche-alho-poro" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/quiche-alho-poro.html"><div class="product-card__name">Quiche de Alho Poró e Tofu</div></a>
+              <div class="product-card__tags"><span class="tag">Vegano</span><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 25,65</div>
+              <button class="buy-now-btn" type="button" data-quickview="quiche-alho-poro">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="pastel-frango">
+            <a href="produto/pastel-frango.html" class="product-card__image"><div class="img-placeholder">Pastel de Forno com Frango</div>
+              <button class="quickview-btn" type="button" data-quickview="pastel-frango" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/pastel-frango.html"><div class="product-card__name">Pastel de Forno com Frango</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
+              <div class="product-card__price">R$ 24,80</div>
+              <button class="buy-now-btn" type="button" data-quickview="pastel-frango">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="quiche-espinafre">
+            <a href="produto/quiche-espinafre.html" class="product-card__image"><div class="img-placeholder">Quiche de Espinafre</div>
+              <button class="quickview-btn" type="button" data-quickview="quiche-espinafre" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/quiche-espinafre.html"><div class="product-card__name">Quiche de Espinafre</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Low Carb</span></div>
+              <div class="product-card__price">R$ 22,35</div>
+              <button class="buy-now-btn" type="button" data-quickview="quiche-espinafre">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="coxinha-aipim">
+            <a href="produto/coxinha-aipim.html" class="product-card__image"><div class="img-placeholder">Coxinha de Aipim Com Frango</div>
+              <button class="quickview-btn" type="button" data-quickview="coxinha-aipim" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/coxinha-aipim.html"><div class="product-card__name">Coxinha de Aipim Com Frango</div></a>
+              <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
+              <div class="product-card__price">R$ 22,15</div>
+              <button class="buy-now-btn" type="button" data-quickview="coxinha-aipim">Comprar Agora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div data-reveal class="editorial editorial--reverse">
+      <div class="editorial__body">
+        <span class="editorial__eyebrow">Feito na Bahia</span>
+        <h2 class="editorial__title">Direto do forno para a sua mesa</h2>
+        <p class="editorial__text">Produzido em Lauro de Freitas, com congelamento que preserva sabor e nutrientes — pronto em minutos, quando você quiser.</p>
+        <a href="sobre.html" class="editorial__link">Conheça nossa história →</a>
+      </div>
+      <div class="editorial__image"><div class="img-placeholder">Pizza saindo do forno</div></div>
+    </div>
+
+      <div data-reveal style="padding: 8px clamp(16px,4vw,32px) 8px;" class="shelf">
+        <div class="shelf-head">
+          <h2 class="section-title">Vegetarianos &amp; Veganos</h2>
+          <div class="shelf-actions">
+            <a href="pizzas.html" class="shelf-link">Ver tudo →</a>
+            <button class="shelf-nav-btn" type="button" data-carousel-prev="vegVeg" aria-label="Anterior">‹</button>
+            <button class="shelf-nav-btn" type="button" data-carousel-next="vegVeg" aria-label="Próximo">›</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel="vegVeg">
+          <div class="product-card" data-product="paozinho-aipim">
+            <a href="produto/paozinho-aipim.html" class="product-card__image"><div class="img-placeholder">Pãozinho de Aipim com Ervas</div>
+              <button class="quickview-btn" type="button" data-quickview="paozinho-aipim" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/paozinho-aipim.html"><div class="product-card__name">Pãozinho de Aipim com Ervas</div></a>
+              <div class="product-card__tags"><span class="tag">Vegetariano</span><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 20,70</div>
+              <button class="buy-now-btn" type="button" data-quickview="paozinho-aipim">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="massa-pizza">
+            <a href="produto/massa-pizza.html" class="product-card__image"><div class="img-placeholder">Massa Pré-Assada para Pizza</div>
+              <button class="quickview-btn" type="button" data-quickview="massa-pizza" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/massa-pizza.html"><div class="product-card__name">Massa Pré-Assada para Pizza</div></a>
+              <div class="product-card__tags"><span class="tag">Vegano</span><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 18,90</div>
+              <button class="buy-now-btn" type="button" data-quickview="massa-pizza">Comprar Agora</button>
+            </div>
+          </div>
+          <div class="product-card" data-product="quiche-alho-poro">
+            <a href="produto/quiche-alho-poro.html" class="product-card__image"><div class="img-placeholder">Quiche de Alho Poró e Tofu</div>
+              <button class="quickview-btn" type="button" data-quickview="quiche-alho-poro" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/quiche-alho-poro.html"><div class="product-card__name">Quiche de Alho Poró e Tofu</div></a>
+              <div class="product-card__tags"><span class="tag">Vegano</span><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 25,65</div>
+              <button class="buy-now-btn" type="button" data-quickview="quiche-alho-poro">Comprar Agora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal style="padding: 8px clamp(16px,4vw,32px) 8px;" class="shelf">
+        <div class="shelf-head">
+          <h2 class="section-title">Pães</h2>
+          <div class="shelf-actions">
+            <a href="pizzas.html" class="shelf-link">Ver tudo →</a>
+            <button class="shelf-nav-btn" type="button" data-carousel-prev="paes" aria-label="Anterior">‹</button>
+            <button class="shelf-nav-btn" type="button" data-carousel-next="paes" aria-label="Próximo">›</button>
+          </div>
+        </div>
+        <div class="carousel" data-carousel="paes">
+          <div class="product-card" data-product="paozinho-aipim">
+            <a href="produto/paozinho-aipim.html" class="product-card__image"><div class="img-placeholder">Pãozinho de Aipim com Ervas</div>
+              <button class="quickview-btn" type="button" data-quickview="paozinho-aipim" aria-label="Visualização rápida">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </a>
+            <div class="product-card__body">
+              <a href="produto/paozinho-aipim.html"><div class="product-card__name">Pãozinho de Aipim com Ervas</div></a>
+              <div class="product-card__tags"><span class="tag">Vegetariano</span><span class="tag">Sem Glúten</span></div>
+              <div class="product-card__price">R$ 20,70</div>
+              <button class="buy-now-btn" type="button" data-quickview="paozinho-aipim">Comprar Agora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div data-reveal class="blog-mini">
+      <h2 class="blog-mini__title">Nutrição em Palavras</h2>
+      <div class="blog-mini-grid">
+        <a href="post/imunidade.html" class="blog-mini-card">
+          <div class="blog-mini-card__image"><div class="img-placeholder">Imagem do post</div></div>
+          <div class="blog-mini-card__body">
+            <div class="blog-mini-card__date">08/05/2021</div>
+            <div class="blog-mini-card__title">Alimentos que melhoram a imunidade</div>
+          </div>
+        </a>
+        <a href="post/chocolate.html" class="blog-mini-card">
+          <div class="blog-mini-card__image"><div class="img-placeholder">Imagem do post</div></div>
+          <div class="blog-mini-card__body">
+            <div class="blog-mini-card__date">07/07/2021</div>
+            <div class="blog-mini-card__title">Chocolate: um grande parceiro para sua saúde</div>
+          </div>
+        </a>
+        <a href="post/sistema-imunologico.html" class="blog-mini-card">
+          <div class="blog-mini-card__image"><div class="img-placeholder">Imagem do post</div></div>
+          <div class="blog-mini-card__body">
+            <div class="blog-mini-card__date">19/07/2021</div>
+            <div class="blog-mini-card__title">Como a alimentação pode contribuir para o sistema imunológico</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+<div data-reveal class="newsletter">
+      <div class="newsletter-blob"></div>
+      <h3 class="newsletter__title">Receba novidades e promoções</h3>
+      <p class="newsletter__text">Cadastre-se e fique por dentro dos lançamentos Chef&amp;Nutri.</p>
+      <form data-prevent-submit>
+        <input type="email" placeholder="Seu e-mail" required>
+        <button class="btn-primary" type="submit">Cadastrar</button>
+      </form>
+    </div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+  <div class="footer-brand">Chef<span>&amp;</span>Nutri</div>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-col__title">INSTITUCIONAL</div>
+      <a href="sobre.html" class="footer-link">Sobre Nós</a>
+      <a href="diferenciais.html" class="footer-link">Nossos Diferenciais</a>
+      <a href="sem-gluten.html" class="footer-link">Sem Glúten e Sem Lactose</a>
+      <a href="blog.html" class="footer-link">Nutrição em Palavras</a>
+    </div>
+    <div>
+      <div class="footer-col__title">ACESSO RÁPIDO</div>
+      <a href="contato.html" class="footer-link">Contato</a>
+      <a href="faq.html" class="footer-link">Perguntas Frequentes</a>
+      <a href="privacidade.html" class="footer-link">Política de Privacidade &amp; Cookies</a>
+    </div>
+    <div>
+      <div class="footer-col__title">CONTATO</div>
+      <a href="https://api.whatsapp.com/send?phone=5571996115102" class="footer-link">(71) 9 9611-5102</a>
+      <a href="mailto:atendimento@chefenutri.com.br" class="footer-link">atendimento@chefenutri.com.br</a>
+      <div class="footer-addr">Rua Itagibá, 110, Galpão 9<br>Lauro de Freitas / BA</div>
+    </div>
+  </div>
+  <div class="footer-bottom">CNPJ: 30.776.986/0001-57 · Chef&amp;Nutri Ltda. © 2026. Todos os direitos reservados.</div>
+  </div>
+</footer>
+<a href="https://api.whatsapp.com/send?phone=5571996115102" class="whatsapp-float" aria-label="WhatsApp">
+  <div class="whatsapp-float__dot"></div>
+</a>
+</div>
+<div class="qv-overlay" id="qvOverlay" data-close-qv></div>
+  <div class="qv-sheet" id="qvSheet">
+    <button class="qv-close" id="qvClose" data-close-qv aria-label="Fechar">&times;</button>
+    <div class="qv-image" id="qvImage"></div>
+    <div class="qv-body">
+      <div class="qv-tags" id="qvTags"></div>
+      <h2 class="qv-name" id="qvName"></h2>
+      <div class="qv-size" id="qvSize"></div>
+      <div class="qv-price" id="qvPrice"></div>
+      <p class="qv-desc" id="qvDesc"></p>
+      <div class="qv-buy-row">
+        <div class="qty-control">
+          <button type="button" id="qvDec" aria-label="Diminuir">−</button>
+          <span id="qvQty">1</span>
+          <button type="button" id="qvInc" aria-label="Aumentar">+</button>
+        </div>
+        <button class="qv-add-btn" type="button">Adicionar · <span id="qvTotal"></span></button>
+      </div>
+      <a href="#" class="qv-link" id="qvLink">Ver página completa do produto →</a>
+    </div>
+  </div>
+<script>window.PRODUTO_BASE = "produto/";</script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+<script src="js/quickview.js"></script>
+</body>
+</html>
