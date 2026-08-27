@@ -66,6 +66,14 @@
         <input placeholder="Cupom de desconto">
         <button type="button">Aplicar</button>
       </div>
+      <div class="cep-check">
+          <label class="cep-check__label" for="cepInput">Calcule o frete e o prazo de entrega</label>
+          <form class="cep-check__row" id="cepForm">
+            <input type="text" id="cepInput" inputmode="numeric" maxlength="9" placeholder="00000-000" aria-label="Seu CEP">
+            <button type="submit">Consultar</button>
+          </form>
+          <div class="cep-check__result" id="cepResult"></div>
+        </div>
       <div class="summary-card">
         <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal"></span></div>
         <div class="summary-row"><span>Frete</span><span id="cartFrete"></span></div>
@@ -80,6 +88,7 @@
       <h3 class="newsletter__title">Receba novidades e promoções</h3>
       <p class="newsletter__text">Cadastre-se e fique por dentro dos lançamentos Chef&amp;Nutri.</p>
       <form data-prevent-submit>
+        <input type="text" placeholder="Seu nome" required>
         <input type="email" placeholder="Seu e-mail" required>
         <button class="btn-primary" type="submit">Cadastrar</button>
       </form>
@@ -138,5 +147,6 @@
 <script src="js/cart.js"></script>
 <script src="js/main.js"></script>
 <script src="js/cart-page.js"></script>
+<script src="js/cep.js"></script>
 </body>
 </html>

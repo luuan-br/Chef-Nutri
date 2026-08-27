@@ -95,10 +95,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
               <div class="product-card__price-row">
                 <span class="product-card__price">R$ 17,99</span>
               </div>
-              <div class="product-card__actions">
-                <button class="qty-add-btn" type="button" data-add-cart="frango-catupiry" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                <button class="buy-now-btn" type="button" data-quickview="frango-catupiry">Comprar Agora</button>
-              </div>
+              <button class="buy-now-btn" type="button" data-buy-now="frango-catupiry">Comprar Agora</button>
             </div>
           </div>
           <div class="product-card" data-product="mussarela">
@@ -114,10 +111,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
               <div class="product-card__price-row">
                 <span class="product-card__price">R$ 17,99</span>
               </div>
-              <div class="product-card__actions">
-                <button class="qty-add-btn" type="button" data-add-cart="mussarela" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                <button class="buy-now-btn" type="button" data-quickview="mussarela">Comprar Agora</button>
-              </div>
+              <button class="buy-now-btn" type="button" data-buy-now="mussarela">Comprar Agora</button>
             </div>
           </div>
           <div class="product-card" data-product="mini-coxinha">
@@ -133,10 +127,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
               <div class="product-card__price-row">
                 <span class="product-card__price">R$ 33,46</span>
               </div>
-              <div class="product-card__actions">
-                <button class="qty-add-btn" type="button" data-add-cart="mini-coxinha" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                <button class="buy-now-btn" type="button" data-quickview="mini-coxinha">Comprar Agora</button>
-              </div>
+              <button class="buy-now-btn" type="button" data-buy-now="mini-coxinha">Comprar Agora</button>
             </div>
           </div>
           <div class="product-card" data-product="tortinha-frango">
@@ -152,10 +143,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
               <div class="product-card__price-row">
                 <span class="product-card__price">R$ 28,25</span>
               </div>
-              <div class="product-card__actions">
-                <button class="qty-add-btn" type="button" data-add-cart="tortinha-frango" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                <button class="buy-now-btn" type="button" data-quickview="tortinha-frango">Comprar Agora</button>
-              </div>
+              <button class="buy-now-btn" type="button" data-buy-now="tortinha-frango">Comprar Agora</button>
             </div>
           </div>
         </div>
@@ -166,6 +154,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
       <h3 class="newsletter__title">Receba novidades e promoções</h3>
       <p class="newsletter__text">Cadastre-se e fique por dentro dos lançamentos Chef&amp;Nutri.</p>
       <form data-prevent-submit>
+        <input type="text" placeholder="Seu nome" required>
         <input type="email" placeholder="Seu e-mail" required>
         <button class="btn-primary" type="submit">Cadastrar</button>
       </form>
@@ -239,10 +228,29 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
       <a href="#" class="qv-link" id="qvLink">Ver página completa do produto →</a>
     </div>
   </div>
+<div class="mc-overlay" id="mcOverlay" data-close-mc></div>
+  <div class="mc-sheet" id="mcSheet">
+    <button class="qv-close" id="mcClose" data-close-mc aria-label="Fechar">&times;</button>
+    <div class="mc-header">
+      <h2 class="mc-title"><span class="mc-title__check">✓</span> Adicionado ao carrinho</h2>
+    </div>
+    <div class="mc-list" id="mcList"></div>
+    <div class="mc-summary"><span>Subtotal</span><span id="mcSubtotal"></span></div>
+    <div class="mc-actions">
+      <a href="../carrinho.html" class="btn-outline">Ver Carrinho</a>
+      <button class="btn-primary" type="button" id="mcCheckout">Finalizar Compra</button>
+    </div>
+    <button class="mc-continue" type="button" data-close-mc>Continuar Comprando</button>
+    <div class="mc-recommend">
+      <h3 class="mc-recommend__title">Você também vai gostar de</h3>
+      <div class="mc-recommend__grid" id="mcRecommend"></div>
+    </div>
+  </div>
 <script>window.PRODUTO_BASE = "../produto/";</script>
 <script src="../js/data.js"></script>
 <script src="../js/cart.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/quickview.js"></script>
+<script src="../js/minicart.js"></script>
 </body>
 </html>
