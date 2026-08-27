@@ -7,7 +7,7 @@
 <meta name="description" content="Conheça alimentos que ajudam a fortalecer as defesas do corpo no dia a dia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
       </a>
       <a href="../carrinho.html" class="icon-btn" aria-label="Carrinho">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-badge" data-cart-count>3</span>
+        <span class="cart-badge" data-cart-count>0</span>
       </a>
     </div>
   </div>
@@ -39,7 +39,9 @@
     <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
   </div>
       <a href="../index.html" class="drawer-link">Início</a>
+      <a href="../loja.html" class="drawer-link">Loja</a>
       <a href="../pizzas.html" class="drawer-link">Pizzas</a>
+      <a href="../promocoes.html" class="drawer-link">Promoções</a>
       <a href="../sobre.html" class="drawer-link">Sobre Nós</a>
       <a href="../diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
       <a href="../sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
@@ -82,6 +84,7 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
         <div class="carousel" data-carousel="postBestSellers">
           <div class="product-card" data-product="frango-catupiry">
             <a href="../produto/frango-catupiry.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050325-pizza-de-frango-com-catupiry-artesanal-120g.png" alt="Pizza de Frango C/ Creme Artesanal" loading="lazy">
+              
               <button class="quickview-btn" type="button" data-quickview="frango-catupiry" aria-label="Visualização rápida">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
@@ -89,12 +92,18 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
             <div class="product-card__body">
               <a href="../produto/frango-catupiry.html"><div class="product-card__name">Pizza de Frango C/ Creme Artesanal</div></a>
               <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
-              <div class="product-card__price">R$ 17,99</div>
-              <button class="buy-now-btn" type="button" data-quickview="frango-catupiry">Comprar Agora</button>
+              <div class="product-card__price-row">
+                <span class="product-card__price">R$ 17,99</span>
+              </div>
+              <div class="product-card__actions">
+                <button class="qty-add-btn" type="button" data-add-cart="frango-catupiry" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
+                <button class="buy-now-btn" type="button" data-quickview="frango-catupiry">Comprar Agora</button>
+              </div>
             </div>
           </div>
           <div class="product-card" data-product="mussarela">
             <a href="../produto/mussarela.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/10/15232050133-pizza-mussarela-100g.png" alt="Pizza Mussarela" loading="lazy">
+              
               <button class="quickview-btn" type="button" data-quickview="mussarela" aria-label="Visualização rápida">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
@@ -102,12 +111,18 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
             <div class="product-card__body">
               <a href="../produto/mussarela.html"><div class="product-card__name">Pizza Mussarela</div></a>
               <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
-              <div class="product-card__price">R$ 17,99</div>
-              <button class="buy-now-btn" type="button" data-quickview="mussarela">Comprar Agora</button>
+              <div class="product-card__price-row">
+                <span class="product-card__price">R$ 17,99</span>
+              </div>
+              <div class="product-card__actions">
+                <button class="qty-add-btn" type="button" data-add-cart="mussarela" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
+                <button class="buy-now-btn" type="button" data-quickview="mussarela">Comprar Agora</button>
+              </div>
             </div>
           </div>
           <div class="product-card" data-product="mini-coxinha">
             <a href="../produto/mini-coxinha.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2026/04/15235942451-minicoxinha-de-aipim-com-frango.png" alt="Mini Coxinha de Aipim Com Frango" loading="lazy">
+              
               <button class="quickview-btn" type="button" data-quickview="mini-coxinha" aria-label="Visualização rápida">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
@@ -115,12 +130,18 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
             <div class="product-card__body">
               <a href="../produto/mini-coxinha.html"><div class="product-card__name">Mini Coxinha de Aipim Com Frango</div></a>
               <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Sem Lactose</span></div>
-              <div class="product-card__price">R$ 33,46</div>
-              <button class="buy-now-btn" type="button" data-quickview="mini-coxinha">Comprar Agora</button>
+              <div class="product-card__price-row">
+                <span class="product-card__price">R$ 33,46</span>
+              </div>
+              <div class="product-card__actions">
+                <button class="qty-add-btn" type="button" data-add-cart="mini-coxinha" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
+                <button class="buy-now-btn" type="button" data-quickview="mini-coxinha">Comprar Agora</button>
+              </div>
             </div>
           </div>
           <div class="product-card" data-product="tortinha-frango">
             <a href="../produto/tortinha-frango.html" class="product-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2026/05/15235939595-tortinha-de-frango.png" alt="Tortinha de Frango" loading="lazy">
+              
               <button class="quickview-btn" type="button" data-quickview="tortinha-frango" aria-label="Visualização rápida">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
@@ -128,8 +149,13 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
             <div class="product-card__body">
               <a href="../produto/tortinha-frango.html"><div class="product-card__name">Tortinha de Frango</div></a>
               <div class="product-card__tags"><span class="tag">Sem Glúten</span><span class="tag">Low Carb</span></div>
-              <div class="product-card__price">R$ 28,25</div>
-              <button class="buy-now-btn" type="button" data-quickview="tortinha-frango">Comprar Agora</button>
+              <div class="product-card__price-row">
+                <span class="product-card__price">R$ 28,25</span>
+              </div>
+              <div class="product-card__actions">
+                <button class="qty-add-btn" type="button" data-add-cart="tortinha-frango" aria-label="Adicionar ao carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
+                <button class="buy-now-btn" type="button" data-quickview="tortinha-frango">Comprar Agora</button>
+              </div>
             </div>
           </div>
         </div>
@@ -154,7 +180,23 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
       <a href="../sobre.html" class="footer-link">Sobre Nós</a>
       <a href="../diferenciais.html" class="footer-link">Nossos Diferenciais</a>
       <a href="../sem-gluten.html" class="footer-link">Sem Glúten e Sem Lactose</a>
+      <a href="../produtos-balanceados.html" class="footer-link">Produtos Balanceados</a>
+      <a href="../ganho-em-qualidade-de-vida.html" class="footer-link">Ganho em Qualidade de Vida</a>
+      <a href="../eu-reciclo.html" class="footer-link">Eu Reciclo</a>
       <a href="../blog.html" class="footer-link">Nutrição em Palavras</a>
+    </div>
+    <div>
+      <div class="footer-col__title">LOJA</div>
+      <a href="../loja.html" class="footer-link">Todos os Produtos</a>
+      <a href="../pizzas.html" class="footer-link">Pizzas</a>
+      <a href="../promocoes.html" class="footer-link">Promoções</a>
+      <a href="../carrinho.html" class="footer-link">Meu Carrinho</a>
+    </div>
+    <div>
+      <div class="footer-col__title">PARCERIAS</div>
+      <a href="../revenda-de-produtos.html" class="footer-link">Revenda de Produtos</a>
+      <a href="../influenciadores.html" class="footer-link">Influenciadores</a>
+      <a href="../nutricionistas.html" class="footer-link">Nutricionistas</a>
     </div>
     <div>
       <div class="footer-col__title">ACESSO RÁPIDO</div>
@@ -192,13 +234,14 @@ Pequenas mudanças na rotina alimentar, mantidas com consistência, fazem difere
           <span id="qvQty">1</span>
           <button type="button" id="qvInc" aria-label="Aumentar">+</button>
         </div>
-        <button class="qv-add-btn" type="button">Adicionar · <span id="qvTotal"></span></button>
+        <button class="qv-add-btn" type="button" id="qvAdd">Adicionar · <span id="qvTotal"></span></button>
       </div>
       <a href="#" class="qv-link" id="qvLink">Ver página completa do produto →</a>
     </div>
   </div>
 <script>window.PRODUTO_BASE = "../produto/";</script>
 <script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/quickview.js"></script>
 </body>

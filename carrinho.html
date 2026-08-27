@@ -7,7 +7,7 @@
 <meta name="description" content="Revise os itens do seu carrinho Chef&amp;Nutri.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
       </a>
       <a href="carrinho.html" class="icon-btn" aria-label="Carrinho">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-badge" data-cart-count>3</span>
+        <span class="cart-badge" data-cart-count>0</span>
       </a>
     </div>
   </div>
@@ -39,7 +39,9 @@
     <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
   </div>
       <a href="index.html" class="drawer-link">Início</a>
+      <a href="loja.html" class="drawer-link">Loja</a>
       <a href="pizzas.html" class="drawer-link">Pizzas</a>
+      <a href="promocoes.html" class="drawer-link">Promoções</a>
       <a href="sobre.html" class="drawer-link">Sobre Nós</a>
       <a href="diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
       <a href="sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
@@ -54,45 +56,24 @@
 <main class="container">
   <section class="cart-page">
     <h1 class="cart-title">Seu Carrinho</h1>
-    <div class="cart-list">
-        <div class="cart-item">
-          <div class="cart-item__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/04/WEB-04_cps.webp" alt="Pizza Portuguesa" loading="lazy"></div>
-          <div class="cart-item__body">
-            <div class="cart-item__name">Pizza Portuguesa</div>
-            <div class="cart-item__size">8 fatias</div>
-            <div class="cart-item__row">
-              <div class="cart-qty">
-                <span>−</span><span class="cart-qty__num">1</span><span>+</span>
-              </div>
-              <span class="cart-item__total">R$ 24,90</span>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <div class="cart-item__image"><img src="https://chefenutri.com.br/wp-content/uploads/2026/04/15235942451-minicoxinha-de-aipim-com-frango.png" alt="Mini Coxinha de Aipim Com Frango" loading="lazy"></div>
-          <div class="cart-item__body">
-            <div class="cart-item__name">Mini Coxinha de Aipim Com Frango</div>
-            <div class="cart-item__size">unid.</div>
-            <div class="cart-item__row">
-              <div class="cart-qty">
-                <span>−</span><span class="cart-qty__num">2</span><span>+</span>
-              </div>
-              <span class="cart-item__total">R$ 66,92</span>
-            </div>
-          </div>
-        </div>
+    <div id="cartEmpty" class="cart-empty">
+      <p>Seu carrinho está vazio.</p>
+      <a href="pizzas.html" class="btn-primary">Ver Produtos</a>
     </div>
-    <div class="coupon-row">
-      <input placeholder="Cupom de desconto">
-      <button type="button">Aplicar</button>
+    <div id="cartContent">
+      <div class="cart-list" id="cartList"></div>
+      <div class="coupon-row">
+        <input placeholder="Cupom de desconto">
+        <button type="button">Aplicar</button>
+      </div>
+      <div class="summary-card">
+        <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal"></span></div>
+        <div class="summary-row"><span>Frete</span><span id="cartFrete"></span></div>
+        <div class="summary-total"><span>Total</span><span id="cartTotal"></span></div>
+      </div>
+      <button class="checkout-btn" type="button" id="checkoutBtn">Finalizar Compra pelo WhatsApp</button>
+      <p class="free-shipping-note" id="cartFreeShipNote"></p>
     </div>
-    <div class="summary-card">
-      <div class="summary-row"><span>Subtotal</span><span>R$ 91,82</span></div>
-      <div class="summary-row"><span>Frete</span><span>R$ 15,90</span></div>
-      <div class="summary-total"><span>Total</span><span>R$ 107,72</span></div>
-    </div>
-    <button class="checkout-btn" type="button">Finalizar Compra</button>
-    <p class="free-shipping-note">Faltam R$ 108,18 para frete grátis (Salvador e Lauro de Freitas)</p>
   </section>
 <div data-reveal class="newsletter">
       <div class="newsletter-blob"></div>
@@ -113,7 +94,23 @@
       <a href="sobre.html" class="footer-link">Sobre Nós</a>
       <a href="diferenciais.html" class="footer-link">Nossos Diferenciais</a>
       <a href="sem-gluten.html" class="footer-link">Sem Glúten e Sem Lactose</a>
+      <a href="produtos-balanceados.html" class="footer-link">Produtos Balanceados</a>
+      <a href="ganho-em-qualidade-de-vida.html" class="footer-link">Ganho em Qualidade de Vida</a>
+      <a href="eu-reciclo.html" class="footer-link">Eu Reciclo</a>
       <a href="blog.html" class="footer-link">Nutrição em Palavras</a>
+    </div>
+    <div>
+      <div class="footer-col__title">LOJA</div>
+      <a href="loja.html" class="footer-link">Todos os Produtos</a>
+      <a href="pizzas.html" class="footer-link">Pizzas</a>
+      <a href="promocoes.html" class="footer-link">Promoções</a>
+      <a href="carrinho.html" class="footer-link">Meu Carrinho</a>
+    </div>
+    <div>
+      <div class="footer-col__title">PARCERIAS</div>
+      <a href="revenda-de-produtos.html" class="footer-link">Revenda de Produtos</a>
+      <a href="influenciadores.html" class="footer-link">Influenciadores</a>
+      <a href="nutricionistas.html" class="footer-link">Nutricionistas</a>
     </div>
     <div>
       <div class="footer-col__title">ACESSO RÁPIDO</div>
@@ -138,7 +135,8 @@
 
 <script>window.PRODUTO_BASE = "produto/";</script>
 <script src="js/data.js"></script>
+<script src="js/cart.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/cart-page.js"></script>
 </body>
 </html>

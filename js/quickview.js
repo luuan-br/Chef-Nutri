@@ -20,6 +20,7 @@
   var qvLink = document.getElementById('qvLink');
   var qvDec = document.getElementById('qvDec');
   var qvInc = document.getElementById('qvInc');
+  var qvAdd = document.getElementById('qvAdd');
   var qvQtyVal = 1;
   var qvProduct = null;
 
@@ -27,13 +28,16 @@
 
   function renderQv() {
     if (!qvProduct) return;
+    var price = qvProduct.promo || qvProduct.price;
     qvTags.innerHTML = qvProduct.tags.map(function (t) { return '<span class="tag tag--lg">' + t + '</span>'; }).join('');
     qvName.textContent = qvProduct.name;
     qvSize.textContent = qvProduct.size;
-    qvPrice.textContent = 'R$ ' + fmt(qvProduct.price);
+    qvPrice.innerHTML = qvProduct.promo
+      ? '<span class="product-card__price-old">R$ ' + fmt(qvProduct.price) + '</span> R$ ' + fmt(price)
+      : 'R$ ' + fmt(price);
     qvDesc.textContent = qvProduct.desc;
     qvQty.textContent = String(qvQtyVal);
-    qvTotal.textContent = 'R$ ' + fmt(qvProduct.price * qvQtyVal);
+    qvTotal.textContent = 'R$ ' + fmt(price * qvQtyVal);
     qvLink.setAttribute('href', produtoBase + qvProduct.id + '.html');
     qvImage.innerHTML = qvProduct.img
       ? '<img src="' + qvProduct.img + '" alt="' + qvProduct.name + '">'
@@ -61,4 +65,10 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeQv(); });
   if (qvDec) qvDec.addEventListener('click', function () { qvQtyVal = Math.max(1, qvQtyVal - 1); renderQv(); });
   if (qvInc) qvInc.addEventListener('click', function () { qvQtyVal += 1; renderQv(); });
+  if (qvAdd) qvAdd.addEventListener('click', function () {
+    if (!qvProduct || !window.ChefNutriCart) return;
+    window.ChefNutriCart.addToCart(qvProduct.id, qvQtyVal);
+    closeQv();
+    window.ChefNutriCart.showToast('Produto adicionado ao carrinho');
+  });
 })();

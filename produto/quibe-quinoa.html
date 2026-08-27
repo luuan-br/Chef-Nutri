@@ -7,7 +7,7 @@
 <meta name="description" content="Quibe assado de quinoa com carne, sem glúten e sem lactose.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
       </a>
       <a href="../carrinho.html" class="icon-btn" aria-label="Carrinho">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-badge" data-cart-count>3</span>
+        <span class="cart-badge" data-cart-count>0</span>
       </a>
     </div>
   </div>
@@ -39,7 +39,9 @@
     <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
   </div>
       <a href="../index.html" class="drawer-link">Início</a>
+      <a href="../loja.html" class="drawer-link">Loja</a>
       <a href="../pizzas.html" class="drawer-link">Pizzas</a>
+      <a href="../promocoes.html" class="drawer-link">Promoções</a>
       <a href="../sobre.html" class="drawer-link">Sobre Nós</a>
       <a href="../diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
       <a href="../sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
@@ -61,27 +63,49 @@
         <h1 class="product-detail__name">Quibe de Quinoa com Carne</h1>
         <div class="product-detail__size">150 g</div>
         <div class="product-detail__price">R$ 26,90</div>
+
+        <h2 class="product-detail__section-title">Descrição</h2>
         <p class="product-detail__desc">Quibe assado de quinoa com carne, sem glúten e sem lactose.</p>
+
         <div class="qty-row">
           <div class="qty-control">
             <button type="button" data-qty-dec aria-label="Diminuir">−</button>
             <span data-qty-val>1</span>
             <button type="button" data-qty-inc aria-label="Aumentar">+</button>
           </div>
-          <button class="add-cart-btn" type="button">Adicionar ao Carrinho</button>
+          <button class="add-cart-btn" type="button" id="addToCartBtn" data-product-id="quibe-quinoa">Adicionar ao Carrinho</button>
         </div>
+
+        <div class="cep-check">
+          <label class="cep-check__label" for="cepInput">Calcule o frete e o prazo de entrega</label>
+          <form class="cep-check__row" id="cepForm">
+            <input type="text" id="cepInput" inputmode="numeric" maxlength="9" placeholder="00000-000" aria-label="Seu CEP">
+            <button type="submit">Consultar</button>
+          </form>
+          <div class="cep-check__result" id="cepResult"></div>
+        </div>
+
         <div class="accordion-item is-open">
           <button class="accordion-trigger" type="button" data-accordion-trigger>
             <span class="accordion-title">Informação Nutricional</span>
             <span class="accordion-symbol">−</span>
           </button>
-          <div class="accordion-panel">Valores aproximados por fatia (60 g) — substitua pelos valores reais da embalagem:
-Valor energético: 145 kcal
-Carboidratos: 18 g
-Proteínas: 5 g
-Gorduras totais: 6 g
-Fibra alimentar: 2 g
-Sódio: 210 mg</div>
+          <div class="accordion-panel accordion-panel--table">
+            <table class="nutri-table">
+            <caption>Informação Nutricional — porção de 60 g</caption>
+            <thead><tr><th>Componente</th><th>Quantidade</th><th>%VD*</th></tr></thead>
+            <tbody>
+              <tr><td>Valor energético</td><td>145 kcal</td><td>7%</td></tr>
+              <tr><td>Carboidratos</td><td>18 g</td><td>6%</td></tr>
+              <tr><td>Proteínas</td><td>5 g</td><td>7%</td></tr>
+              <tr><td>Gorduras totais</td><td>6 g</td><td>11%</td></tr>
+              <tr><td>Gorduras saturadas</td><td>1,8 g</td><td>8%</td></tr>
+              <tr><td>Fibra alimentar</td><td>2 g</td><td>8%</td></tr>
+              <tr><td>Sódio</td><td>210 mg</td><td>9%</td></tr>
+            </tbody>
+          </table>
+          <p class="nutri-note">*% Valores Diários de referência com base em uma dieta de 2.000 kcal. Valores aproximados — consulte a embalagem do produto para as informações exatas.</p>
+          </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger" type="button" data-accordion-trigger>
@@ -120,7 +144,7 @@ Sódio: 210 mg</div>
             <div class="related-card__image"><img src="https://chefenutri.com.br/wp-content/uploads/2024/11/15232050957-pizza-calabresa-moida-110g.png" alt="Pizza Tipo Calabresa Moída" loading="lazy"></div>
             <div class="related-card__body">
               <div class="related-card__name">Pizza Tipo Calabresa Moída</div>
-              <div class="related-card__price">R$ 17,40</div>
+              <div class="related-card__price">R$ 14,90</div>
             </div>
           </a>
       </div>
@@ -145,7 +169,23 @@ Sódio: 210 mg</div>
       <a href="../sobre.html" class="footer-link">Sobre Nós</a>
       <a href="../diferenciais.html" class="footer-link">Nossos Diferenciais</a>
       <a href="../sem-gluten.html" class="footer-link">Sem Glúten e Sem Lactose</a>
+      <a href="../produtos-balanceados.html" class="footer-link">Produtos Balanceados</a>
+      <a href="../ganho-em-qualidade-de-vida.html" class="footer-link">Ganho em Qualidade de Vida</a>
+      <a href="../eu-reciclo.html" class="footer-link">Eu Reciclo</a>
       <a href="../blog.html" class="footer-link">Nutrição em Palavras</a>
+    </div>
+    <div>
+      <div class="footer-col__title">LOJA</div>
+      <a href="../loja.html" class="footer-link">Todos os Produtos</a>
+      <a href="../pizzas.html" class="footer-link">Pizzas</a>
+      <a href="../promocoes.html" class="footer-link">Promoções</a>
+      <a href="../carrinho.html" class="footer-link">Meu Carrinho</a>
+    </div>
+    <div>
+      <div class="footer-col__title">PARCERIAS</div>
+      <a href="../revenda-de-produtos.html" class="footer-link">Revenda de Produtos</a>
+      <a href="../influenciadores.html" class="footer-link">Influenciadores</a>
+      <a href="../nutricionistas.html" class="footer-link">Nutricionistas</a>
     </div>
     <div>
       <div class="footer-col__title">ACESSO RÁPIDO</div>
@@ -170,7 +210,8 @@ Sódio: 210 mg</div>
 
 <script>window.PRODUTO_BASE = "";</script>
 <script src="../js/data.js"></script>
+<script src="../js/cart.js"></script>
 <script src="../js/main.js"></script>
-
+<script src="../js/cep.js"></script>
 </body>
 </html>

@@ -31,6 +31,7 @@ window.CHEFNUTRI_DATA = {
       "name": "Pizza Tipo Calabresa Moída",
       "size": "110 g",
       "price": 17.4,
+      "promo": 14.9,
       "tags": [
         "Sem Glúten",
         "Sem Lactose"
@@ -43,6 +44,7 @@ window.CHEFNUTRI_DATA = {
       "name": "Pizza Marguerita ao Pesto",
       "size": "120 g",
       "price": 18.5,
+      "promo": 15.9,
       "tags": [
         "Sem Glúten",
         "Sem Lactose"
@@ -134,6 +136,7 @@ window.CHEFNUTRI_DATA = {
       "name": "Quiche de Espinafre",
       "size": "low carb",
       "price": 22.35,
+      "promo": 18.9,
       "tags": [
         "Sem Glúten",
         "Low Carb"
@@ -145,6 +148,7 @@ window.CHEFNUTRI_DATA = {
       "name": "Coxinha de Aipim Com Frango",
       "size": "unid.",
       "price": 22.15,
+      "promo": 18.5,
       "tags": [
         "Sem Glúten",
         "Sem Lactose"
@@ -167,6 +171,7 @@ window.CHEFNUTRI_DATA = {
       "name": "Massa Pré-Assada para Pizza",
       "size": "120 g",
       "price": 18.9,
+      "promo": 15.9,
       "tags": [
         "Vegano",
         "Sem Glúten"

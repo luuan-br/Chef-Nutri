@@ -86,6 +86,18 @@
     });
   });
 
+  // ---- Adicionar ao carrinho (página de detalhe do produto) ----
+  var addToCartBtn = document.getElementById('addToCartBtn');
+  if (addToCartBtn && window.ChefNutriCart) {
+    addToCartBtn.addEventListener('click', function () {
+      var id = addToCartBtn.getAttribute('data-product-id');
+      var valEl = document.querySelector('.qty-row [data-qty-val]');
+      var qty = valEl ? parseInt(valEl.textContent, 10) || 1 : 1;
+      window.ChefNutriCart.addToCart(id, qty);
+      window.ChefNutriCart.showToast('Produto adicionado ao carrinho');
+    });
+  }
+
   // ---- Formulários decorativos (sem back-end nesta versão estática) ----
   document.querySelectorAll('[data-prevent-submit]').forEach(function (form) {
     form.addEventListener('submit', function (e) { e.preventDefault(); });
