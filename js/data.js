@@ -97,7 +97,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Low Carb"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Tortinha+Sertaneja&font=roboto",
+      "img": "https://picsum.photos/seed/tortinha-sertaneja/800/800",
       "desc": "Tortinha low carb sertaneja, massa sem glúten e sem lactose."
     },
     {
@@ -108,7 +108,7 @@ window.CHEFNUTRI_DATA = {
       "tags": [
         "Sem Glúten"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Quibe+de+Quinoa+com+Carne&font=roboto",
+      "img": "https://picsum.photos/seed/quibe-de-quinoa-com-carne/800/800",
       "desc": "Quibe assado de quinoa com carne, sem glúten e sem lactose."
     },
     {
@@ -120,7 +120,7 @@ window.CHEFNUTRI_DATA = {
         "Vegano",
         "Sem Glúten"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Quiche+de+Alho+Poro+e+Tofu&font=roboto",
+      "img": "https://picsum.photos/seed/quiche-de-alho-poro-e-tofu/800/800",
       "desc": "Quiche vegano de alho poró e tofu, massa sem glúten."
     },
     {
@@ -132,7 +132,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Sem Lactose"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Pastel+de+Forno+com+Frango&font=roboto",
+      "img": "https://picsum.photos/seed/pastel-de-forno-com-frango/800/800",
       "desc": "Pastel assado recheado com frango, sem glúten e sem lactose."
     },
     {
@@ -145,7 +145,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Low Carb"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Quiche+de+Espinafre&font=roboto",
+      "img": "https://picsum.photos/seed/quiche-de-espinafre/800/800",
       "desc": "Quiche low carb de espinafre, sem glúten e sem lactose."
     },
     {
@@ -158,7 +158,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Sem Lactose"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Coxinha+de+Aipim+Com+Frango&font=roboto",
+      "img": "https://picsum.photos/seed/coxinha-de-aipim-com-frango/800/800",
       "desc": "Coxinha de aipim recheada com frango, sem glúten e sem lactose."
     },
     {
@@ -170,7 +170,7 @@ window.CHEFNUTRI_DATA = {
         "Vegetariano",
         "Sem Glúten"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Paozinho+de+Aipim+com+Ervas&font=roboto",
+      "img": "https://picsum.photos/seed/paozinho-de-aipim-com-ervas/800/800",
       "desc": "Pãozinho de aipim com ervas frescas, vegetariano e sem glúten."
     },
     {
@@ -183,7 +183,7 @@ window.CHEFNUTRI_DATA = {
         "Vegano",
         "Sem Glúten"
       ],
-      "img": "https://placehold.co/800x800/EAE5D4/6B5C36?text=Massa+Pre-Assada+para+Pizza&font=roboto",
+      "img": "https://picsum.photos/seed/massa-pre-assada-para-pizza/800/800",
       "desc": "Massa pré-assada vegana para pizza, sem glúten e sem lactose."
     }
   ],
