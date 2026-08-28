@@ -12,6 +12,67 @@
   var activeTags = [];
   var sortBy = 'relevancia';
 
+  // ---- Paginação (ativa apenas se a página tiver [data-pagination]) ----
+  var PAGE_SIZE = 12;
+  var paginationEl = document.querySelector('[data-pagination]');
+  var currentPage = 1;
+
+  function paginate(visible) {
+    if (!paginationEl) return;
+    var totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    var start = (currentPage - 1) * PAGE_SIZE;
+    visible.forEach(function (card, i) {
+      if (i < start || i >= start + PAGE_SIZE) card.style.display = 'none';
+    });
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    paginationEl.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    function addBtn(label, page, opts) {
+      opts = opts || {};
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = opts.isNum ? 'pagination__num' : 'pagination__btn';
+      btn.textContent = label;
+      if (opts.isActive) { btn.classList.add('is-active'); }
+      if (opts.disabled) { btn.disabled = true; }
+      if (!opts.disabled && !opts.isActive) {
+        btn.addEventListener('click', function () {
+          currentPage = page;
+          applyAll(false);
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+      paginationEl.appendChild(btn);
+    }
+
+    function addEllipsis() {
+      var span = document.createElement('span');
+      span.className = 'pagination__ellipsis';
+      span.textContent = '…';
+      paginationEl.appendChild(span);
+    }
+
+    addBtn('‹', currentPage - 1, { disabled: currentPage === 1 });
+
+    var pages = [];
+    for (var p = 1; p <= totalPages; p++) {
+      if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1) pages.push(p);
+    }
+    var lastAdded = 0;
+    pages.forEach(function (p) {
+      if (lastAdded && p - lastAdded > 1) addEllipsis();
+      addBtn(String(p), p, { isNum: true, isActive: p === currentPage });
+      lastAdded = p;
+    });
+
+    addBtn('›', currentPage + 1, { disabled: currentPage === totalPages });
+  }
+
   // ---- Filtros (chips desktop + gaveta mobile) ----
   var allChipEls = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
   var clearBtns = Array.prototype.slice.call(document.querySelectorAll('[data-clear-filters]'));
@@ -73,7 +134,8 @@
   var resultCountEl = document.querySelector('[data-result-count]');
   var emptyState = document.querySelector('[data-empty-state]');
 
-  function applyAll() {
+  function applyAll(resetPage) {
+    if (resetPage !== false) currentPage = 1;
     var q = currentQuery();
     var visible = [];
     cards.forEach(function (card) {
@@ -91,6 +153,8 @@
     else if (sortBy === 'maior-preco') visible.sort(function (a, b) { return parseFloat(b.dataset.price) - parseFloat(a.dataset.price); });
     else if (sortBy === 'nome') visible.sort(function (a, b) { return a.dataset.name.localeCompare(b.dataset.name); });
     visible.forEach(function (card) { grid.appendChild(card); });
+
+    paginate(visible);
 
     var n = visible.length;
     if (resultCountEl) {
