@@ -97,7 +97,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Low Carb"
       ],
-      "img": "https://picsum.photos/seed/tortinha-sertaneja/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2025/11/15295648613-sert-2024.png",
       "desc": "Tortinha low carb sertaneja, massa sem glúten e sem lactose."
     },
     {
@@ -108,7 +108,7 @@ window.CHEFNUTRI_DATA = {
       "tags": [
         "Sem Glúten"
       ],
-      "img": "https://picsum.photos/seed/quibe-de-quinoa-com-carne/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2024/09/15290439736-quibe-1.png",
       "desc": "Quibe assado de quinoa com carne, sem glúten e sem lactose."
     },
     {
@@ -120,7 +120,7 @@ window.CHEFNUTRI_DATA = {
         "Vegano",
         "Sem Glúten"
       ],
-      "img": "https://picsum.photos/seed/quiche-de-alho-poro-e-tofu/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2024/11/15235939799-quiche-de-alho.png",
       "desc": "Quiche vegano de alho poró e tofu, massa sem glúten."
     },
     {
@@ -132,7 +132,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Sem Lactose"
       ],
-      "img": "https://picsum.photos/seed/pastel-de-forno-com-frango/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2025/09/15373021073-pastel-de-forno-120g.png",
       "desc": "Pastel assado recheado com frango, sem glúten e sem lactose."
     },
     {
@@ -145,7 +145,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Low Carb"
       ],
-      "img": "https://picsum.photos/seed/quiche-de-espinafre/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2024/09/15232047648-quiche-de-espinafre.png",
       "desc": "Quiche low carb de espinafre, sem glúten e sem lactose."
     },
     {
@@ -158,7 +158,7 @@ window.CHEFNUTRI_DATA = {
         "Sem Glúten",
         "Sem Lactose"
       ],
-      "img": "https://picsum.photos/seed/coxinha-de-aipim-com-frango/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2024/09/15235943130-coxinha-de-aipim-com-frango-160g.png",
       "desc": "Coxinha de aipim recheada com frango, sem glúten e sem lactose."
     },
     {
@@ -170,7 +170,7 @@ window.CHEFNUTRI_DATA = {
         "Vegetariano",
         "Sem Glúten"
       ],
-      "img": "https://picsum.photos/seed/paozinho-de-aipim-com-ervas/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2024/11/15235941399-paozinho-de-queijo-fake-com-ervas-300g.png",
       "desc": "Pãozinho de aipim com ervas frescas, vegetariano e sem glúten."
     },
     {
@@ -183,7 +183,7 @@ window.CHEFNUTRI_DATA = {
         "Vegano",
         "Sem Glúten"
       ],
-      "img": "https://picsum.photos/seed/massa-pre-assada-para-pizza/800/800",
+      "img": "https://chefenutri.com.br/wp-content/uploads/2025/10/15387456612-massa1.png",
       "desc": "Massa pré-assada vegana para pizza, sem glúten e sem lactose."
     }
   ],
