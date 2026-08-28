@@ -35,13 +35,25 @@
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <nav class="drawer" id="drawer">
   <div class="drawer-head">
-    <span class="drawer-brand">Chef&amp;Nutri</span>
+    <a href="index.html" class="drawer-brand" aria-label="Chef&amp;Nutri"><img src="uploads/logo-chef-e-nutri-branco.png.webp" alt="Chef&amp;Nutri"></a>
     <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
   </div>
-      <a href="index.html" class="drawer-link">Início</a>
-      <a href="loja.html" class="drawer-link">Loja</a>
-      <a href="pizzas.html" class="drawer-link">Pizzas</a>
-      <a href="promocoes.html" class="drawer-link">Promoções</a>
+      <div class="drawer-group">
+        <div class="drawer-group__row">
+          <a href="loja.html" class="drawer-link drawer-group__link">Todos os Produtos</a>
+          <button class="drawer-group__toggle" type="button" data-drawer-toggle aria-label="Expandir categorias" aria-expanded="false">
+            <span class="drawer-group__arrow">&#9662;</span>
+          </button>
+        </div>
+        <div class="drawer-submenu">
+          <a href="promocoes.html" class="drawer-sublink">Promoções</a>
+          <a href="pizzas.html" class="drawer-sublink">Pizzas</a>
+          <a href="loja.html" class="drawer-sublink">Salgados</a>
+          <a href="loja.html" class="drawer-sublink">Vegetarianos</a>
+          <a href="loja.html" class="drawer-sublink">Veganos</a>
+          <a href="loja.html" class="drawer-sublink">Pães</a>
+        </div>
+      </div>
       <a href="sobre.html" class="drawer-link">Sobre Nós</a>
       <a href="diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
       <a href="sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
@@ -64,45 +76,115 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Qual o prazo de validade dos produtos?</span>
+          <span class="faq-q">Como faço para encomendar os produtos da Chef&amp;Nutri?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">Todos os produtos são congelados e mantêm sua qualidade por até 6 meses no freezer, desde que a embalagem não seja violada. Confira a validade impressa em cada pacote.</div>
+        <div class="faq-answer">Você pode fazer seu pedido através do nosso site www.chefenutri.com.br ou pelo WhatsApp (71) 9 9611-5102 e agendar o dia que disponibilizamos para receber os produtos no conforto de sua casa.</div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Como faço para preparar?</span>
+          <span class="faq-q">Como funciona o delivery de entregas?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">A maioria dos produtos vai direto do freezer ao forno ou air fryer, sem necessidade de descongelar. O modo de preparo está sempre na embalagem.</div>
+        <div class="faq-answer">Nossas entregas são feitas às segundas, quartas e sextas-feiras, das 14 às 18 horas. Não agendamos horário específico para cada cliente, pois a entrega é feita e definida pela rota do dia.</div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Quais formas de pagamento são aceitas?</span>
+          <span class="faq-q">Como são elaborados os pratos?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">Aceitamos cartão de crédito, débito, Pix e boleto bancário no checkout do site.</div>
+        <div class="faq-answer">Nossos pratos são desenvolvidos por nossa chef de cozinha, Renata Nunes, especialista em gastronomia funcional, e preparados por uma equipe especializada na área. Nosso cuidado começa com a escolha de insumos frescos e de qualidade, que são preparados de maneira a manter o máximo de seus nutrientes, sempre com muito sabor.</div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Qual a área de entrega?</span>
+          <span class="faq-q">Como confiro a lista de insumos do produto antes de efetivar a compra?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">Entregamos em Salvador e Lauro de Freitas com frete grátis acima de R$200. Para outras regiões, consulte prazos e valores no checkout.</div>
+        <div class="faq-answer">Todos os produtos Chef&amp;Nutri possuem a lista de ingredientes e tabela nutricional disponível no site antes de efetivar a compra. Basta clicar na foto do produto desejado, na mesma você encontrará todas as informações. Optando em comprar o produto, na página você já consegue selecionar o item para o seu carrinho.</div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Os produtos contêm glúten ou lactose?</span>
+          <span class="faq-q">Os produtos têm conservantes e corantes?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">Não. Todos os produtos Chef&amp;Nutri são 100% sem glúten e sem lactose, produzidos em linha dedicada e livre de contaminação cruzada.</div>
+        <div class="faq-answer">Nossos produtos são feitos de maneira artesanal, sem conservantes e aditivos químicos, que geralmente são usados nos alimentos para aumentar a durabilidade e mascarar o sabor de insumos com baixa qualidade. No entanto, estudos sugerem que muitos desses aditivos têm causado alergias, contribuído para o sobrepeso e obesidade, causando déficit de atenção e hiperatividade, bem como doenças crônicas, entre elas, cânceres principalmente no trato gastrointestinal e colo-retal. Ao usar insumos de qualidade e manter nossos produtos livres desses aditivos, garantimos que eles ofereçam a excelência de seu sabor e sua cor natural. Em consequência, eles ficam mais prazerosos para o consumo e você, mais saudável!</div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" type="button" data-faq-trigger>
-          <span class="faq-q">Posso trocar ou devolver um pedido?</span>
+          <span class="faq-q">Qual a validade dos produtos?</span>
           <span class="faq-symbol">+</span>
         </button>
-        <div class="faq-answer">Sim, entre em contato pelo WhatsApp em até 7 dias após o recebimento para solicitar troca ou devolução, conforme o Código de Defesa do Consumidor.</div>
+        <div class="faq-answer">Os produtos Chef&amp;Nutri são congelados e duram até 3 meses no freezer a partir da data de fabricação. Para manter o produto dentro da validade é necessário seguir as orientações indicadas na etiqueta do produto.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Os alimentos podem ser descongelados e congelados novamente?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Não indicamos de forma alguma você descongelar e congelar novamente seus alimentos, pois eles perdem os nutrientes e há risco de contaminação microbiológica. O ideal é que você descongele apenas o alimento que irá consumir.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Como funcionam os kits?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Planejar e organizar a alimentação é uma ótima forma de não cair na mesmice e ainda ter a oportunidade de desfrutar de novos sabores e combinações. Produzidos com a supervisão de uma nutricionista e nossa chef de cozinha, os kits foram feitos para trazer praticidade, saúde e variedade para que você possa consumir diferentes nutrientes, sem monotonia! Você pode escolher por nossos kits optando pelo qual combina mais com o seu plano alimentar, assim você deixa as refeições da semana toda planejada.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Posso substituir algum sabor de prato no kit antes de efetivar a compra?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Caso queira, você pode trocar algum prato em seu kit, desde que eles tenham o mesmo valor. Para validar esta opção entre em contato no nosso WhatsApp (71) 9 9611-5102.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Como esquentar as refeições nas embalagens de papel?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Para esquentar, basta retirar o produto do freezer e deixar na geladeira até descongelar. Depois é só retirar a tampa da embalagem, esquentar no forno pré-aquecido a 180°C por 20 a 30 minutos, dependendo do forno. Obs: os produtos só poderão ser aquecidos nas embalagens com temperatura máxima de 180°C — acima disso, o papel pode queimar. Caso o produto ainda esteja congelado, leve ao forno por 30 a 50 minutos. Para checar se ele já está quente, espete com um garfo depois de 30 minutos; se não estiver, deixe mais um pouco no forno. Não é necessário retirar a embalagem de papel.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">As embalagens das refeições vão direto ao forno?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Sim, pensando no seu conforto, nossas embalagens de papelão foram feitas para ir direto ao forno. Obs.: os produtos só poderão ser aquecidos nas embalagens com temperatura máxima de 180°C — acima disso, o papel pode queimar.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Posso aquecer no micro-ondas?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Orientamos que você esquente os produtos Chef&amp;Nutri de preferência no forno convencional, fogão ou Air Fryer, a depender do produto. Porém, no caso do micro-ondas, deixe-os até descongelar na geladeira. Após o descongelamento, é só levar ao micro-ondas por 1 minuto e 30 segundos a 1 minuto e 40 segundos, a depender da potência do forno — se o seu tiver potência mais baixa, avalie se é necessário deixar mais tempo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Como aqueço os salgados?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Indicamos aquecer seus salgados no Air Fryer, em uma frigideira ou em um forno convencional. Na etiqueta do seu produto você encontra as sugestões adequadas, assim seus produtos ficam com uma textura mais agradável e mais saudáveis. Não indicamos o uso de óleo para fritar, pois, além de não ser saudável, pode fazer com que o produto se desmanche no preparo. Sempre confira também se seu produto possui alguma indicação específica de preparo na própria embalagem.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">Como descongelar o mousse de chocolate?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Para a mousse de chocolate não perder a textura, retire-a do freezer e deixe fora da geladeira por cerca de 20 a 40 minutos. Se preferir comer congelado, a textura se assemelha a um sorvete.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">As sopas e caldos são batidas ou possuem pedaço de tempero aparecendo?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Sim, todas as nossas sopas são batidas no liquidificador. Apenas nosso caldo verde leva couve chiffonada por cima.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" data-faq-trigger>
+          <span class="faq-q">A embalagem é reciclável?</span>
+          <span class="faq-symbol">+</span>
+        </button>
+        <div class="faq-answer">Sim, nossas embalagens são recicláveis. Basta realizar a separação do lixo em sua casa conforme o tipo de material.</div>
       </div>
     </div>
   </section>
@@ -119,7 +201,18 @@
 </main>
 <footer class="site-footer">
   <div class="site-footer__inner">
-  <div class="footer-brand">Chef<span>&amp;</span>Nutri</div>
+  <img src="uploads/logo-chef-e-nutri-branco.png.webp" alt="Chef&amp;Nutri" class="footer-brand">
+    <div class="footer-social">
+      <a href="https://www.facebook.com/ChefNutri-107145294267404/" class="footer-social__facebook" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/chefenutri/" class="footer-social__instagram" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/chef-nutri" class="footer-social__linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    </div>
   <div class="footer-grid">
     <div>
       <div class="footer-col__title">INSTITUCIONAL</div>
@@ -134,8 +227,12 @@
     <div>
       <div class="footer-col__title">LOJA</div>
       <a href="loja.html" class="footer-link">Todos os Produtos</a>
-      <a href="pizzas.html" class="footer-link">Pizzas</a>
       <a href="promocoes.html" class="footer-link">Promoções</a>
+      <a href="pizzas.html" class="footer-link">Pizzas</a>
+      <a href="loja.html" class="footer-link">Salgados</a>
+      <a href="loja.html" class="footer-link">Vegetarianos</a>
+      <a href="loja.html" class="footer-link">Veganos</a>
+      <a href="loja.html" class="footer-link">Pães</a>
       <a href="carrinho.html" class="footer-link">Meu Carrinho</a>
     </div>
     <div>
@@ -156,6 +253,14 @@
       <a href="mailto:atendimento@chefenutri.com.br" class="footer-link">atendimento@chefenutri.com.br</a>
       <div class="footer-addr">Rua Itagibá, 110, Galpão 9<br>Lauro de Freitas / BA</div>
     </div>
+  </div>
+  <div class="footer-badges">
+    <a href="https://transparencyreport.google.com/safe-browsing/search?url=chefenutri.com.br&amp;hl=pt_BR" target="_blank" rel="noopener" class="footer-badges__chip">
+      <img src="https://chefenutri.com.br/wp-content/uploads/2022/09/google-safe-browsing.png" alt="Google Safe Browsing" loading="lazy">
+    </a>
+    <span class="footer-badges__chip">
+      <img src="https://chefenutri.com.br/wp-content/uploads/2022/09/selosdepagamentochef.png" alt="Selos de pagamento" loading="lazy">
+    </span>
   </div>
   <div class="footer-bottom">CNPJ: 30.776.986/0001-57 · Chef&amp;Nutri Ltda. © 2026. Todos os direitos reservados.</div>
   </div>

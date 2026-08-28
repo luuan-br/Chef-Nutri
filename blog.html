@@ -35,13 +35,25 @@
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <nav class="drawer" id="drawer">
   <div class="drawer-head">
-    <span class="drawer-brand">Chef&amp;Nutri</span>
+    <a href="index.html" class="drawer-brand" aria-label="Chef&amp;Nutri"><img src="uploads/logo-chef-e-nutri-branco.png.webp" alt="Chef&amp;Nutri"></a>
     <button class="drawer-close" id="drawerClose" aria-label="Fechar">&times;</button>
   </div>
-      <a href="index.html" class="drawer-link">Início</a>
-      <a href="loja.html" class="drawer-link">Loja</a>
-      <a href="pizzas.html" class="drawer-link">Pizzas</a>
-      <a href="promocoes.html" class="drawer-link">Promoções</a>
+      <div class="drawer-group">
+        <div class="drawer-group__row">
+          <a href="loja.html" class="drawer-link drawer-group__link">Todos os Produtos</a>
+          <button class="drawer-group__toggle" type="button" data-drawer-toggle aria-label="Expandir categorias" aria-expanded="false">
+            <span class="drawer-group__arrow">&#9662;</span>
+          </button>
+        </div>
+        <div class="drawer-submenu">
+          <a href="promocoes.html" class="drawer-sublink">Promoções</a>
+          <a href="pizzas.html" class="drawer-sublink">Pizzas</a>
+          <a href="loja.html" class="drawer-sublink">Salgados</a>
+          <a href="loja.html" class="drawer-sublink">Vegetarianos</a>
+          <a href="loja.html" class="drawer-sublink">Veganos</a>
+          <a href="loja.html" class="drawer-sublink">Pães</a>
+        </div>
+      </div>
       <a href="sobre.html" class="drawer-link">Sobre Nós</a>
       <a href="diferenciais.html" class="drawer-link">Nossos Diferenciais</a>
       <a href="sem-gluten.html" class="drawer-link">Sem Glúten e Sem Lactose</a>
@@ -65,7 +77,7 @@
     </div>
     <div class="blog-grid">
       <a href="post/imunidade.html" class="blog-card">
-        <div class="blog-card__image"><div class="img-placeholder">Imagem do post</div></div>
+        <div class="blog-card__image"><img src="https://placehold.co/800x800/EAE5D4/6B5C36?text=Imagem+do+post&font=roboto" alt="Imagem do post" loading="lazy"></div>
         <div class="blog-card__body">
           <div class="blog-card__date">08/05/2021</div>
           <div class="blog-card__title">Alimentos que melhoram a imunidade</div>
@@ -73,7 +85,7 @@
         </div>
       </a>
       <a href="post/chocolate.html" class="blog-card">
-        <div class="blog-card__image"><div class="img-placeholder">Imagem do post</div></div>
+        <div class="blog-card__image"><img src="https://placehold.co/800x800/EAE5D4/6B5C36?text=Imagem+do+post&font=roboto" alt="Imagem do post" loading="lazy"></div>
         <div class="blog-card__body">
           <div class="blog-card__date">07/07/2021</div>
           <div class="blog-card__title">Chocolate: um grande parceiro para sua saúde</div>
@@ -81,7 +93,7 @@
         </div>
       </a>
       <a href="post/sistema-imunologico.html" class="blog-card">
-        <div class="blog-card__image"><div class="img-placeholder">Imagem do post</div></div>
+        <div class="blog-card__image"><img src="https://placehold.co/800x800/EAE5D4/6B5C36?text=Imagem+do+post&font=roboto" alt="Imagem do post" loading="lazy"></div>
         <div class="blog-card__body">
           <div class="blog-card__date">19/07/2021</div>
           <div class="blog-card__title">Como a alimentação pode contribuir para o sistema imunológico</div>
@@ -103,7 +115,18 @@
 </main>
 <footer class="site-footer">
   <div class="site-footer__inner">
-  <div class="footer-brand">Chef<span>&amp;</span>Nutri</div>
+  <img src="uploads/logo-chef-e-nutri-branco.png.webp" alt="Chef&amp;Nutri" class="footer-brand">
+    <div class="footer-social">
+      <a href="https://www.facebook.com/ChefNutri-107145294267404/" class="footer-social__facebook" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/chefenutri/" class="footer-social__instagram" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/chef-nutri" class="footer-social__linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    </div>
   <div class="footer-grid">
     <div>
       <div class="footer-col__title">INSTITUCIONAL</div>
@@ -118,8 +141,12 @@
     <div>
       <div class="footer-col__title">LOJA</div>
       <a href="loja.html" class="footer-link">Todos os Produtos</a>
-      <a href="pizzas.html" class="footer-link">Pizzas</a>
       <a href="promocoes.html" class="footer-link">Promoções</a>
+      <a href="pizzas.html" class="footer-link">Pizzas</a>
+      <a href="loja.html" class="footer-link">Salgados</a>
+      <a href="loja.html" class="footer-link">Vegetarianos</a>
+      <a href="loja.html" class="footer-link">Veganos</a>
+      <a href="loja.html" class="footer-link">Pães</a>
       <a href="carrinho.html" class="footer-link">Meu Carrinho</a>
     </div>
     <div>
@@ -140,6 +167,14 @@
       <a href="mailto:atendimento@chefenutri.com.br" class="footer-link">atendimento@chefenutri.com.br</a>
       <div class="footer-addr">Rua Itagibá, 110, Galpão 9<br>Lauro de Freitas / BA</div>
     </div>
+  </div>
+  <div class="footer-badges">
+    <a href="https://transparencyreport.google.com/safe-browsing/search?url=chefenutri.com.br&amp;hl=pt_BR" target="_blank" rel="noopener" class="footer-badges__chip">
+      <img src="https://chefenutri.com.br/wp-content/uploads/2022/09/google-safe-browsing.png" alt="Google Safe Browsing" loading="lazy">
+    </a>
+    <span class="footer-badges__chip">
+      <img src="https://chefenutri.com.br/wp-content/uploads/2022/09/selosdepagamentochef.png" alt="Selos de pagamento" loading="lazy">
+    </span>
   </div>
   <div class="footer-bottom">CNPJ: 30.776.986/0001-57 · Chef&amp;Nutri Ltda. © 2026. Todos os direitos reservados.</div>
   </div>

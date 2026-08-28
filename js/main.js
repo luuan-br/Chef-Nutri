@@ -20,6 +20,16 @@
     if (e.key === 'Escape') closeMenu();
   });
 
+  // ---- Submenu de categorias no drawer ----
+  document.querySelectorAll('[data-drawer-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var group = btn.closest('.drawer-group');
+      if (!group) return;
+      var isOpen = group.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
   // ---- Revelar ao rolar ----
   var revealEls = document.querySelectorAll('[data-reveal]');
   if (revealEls.length) {
@@ -38,14 +48,67 @@
     }
   }
 
-  // ---- Carrosséis de produtos (setas) ----
-  document.querySelectorAll('[data-carousel-prev], [data-carousel-next]').forEach(function (btn) {
-    var name = btn.getAttribute('data-carousel-prev') || btn.getAttribute('data-carousel-next');
-    var dir = btn.hasAttribute('data-carousel-prev') ? -1 : 1;
-    btn.addEventListener('click', function () {
-      var track = document.querySelector('[data-carousel="' + name + '"]');
-      if (track) track.scrollBy({ left: dir * track.clientWidth * 0.82, behavior: 'smooth' });
+  // ---- Carrosséis de produtos (setas + dots) ----
+  function debounce(fn, wait) {
+    var t;
+    return function () {
+      clearTimeout(t);
+      t = setTimeout(fn, wait);
+    };
+  }
+
+  document.querySelectorAll('[data-carousel]').forEach(function (track) {
+    var name = track.getAttribute('data-carousel');
+    var controls = document.querySelector('[data-carousel-controls="' + name + '"]');
+    var dotsWrap = document.querySelector('[data-carousel-dots="' + name + '"]');
+    var prevBtn = document.querySelector('[data-carousel-prev="' + name + '"]');
+    var nextBtn = document.querySelector('[data-carousel-next="' + name + '"]');
+    var dots = [];
+
+    if (prevBtn) prevBtn.addEventListener('click', function () {
+      track.scrollBy({ left: -track.clientWidth * 0.82, behavior: 'smooth' });
     });
+    if (nextBtn) nextBtn.addEventListener('click', function () {
+      track.scrollBy({ left: track.clientWidth * 0.82, behavior: 'smooth' });
+    });
+
+    if (!controls || !dotsWrap) return;
+
+    function buildDots() {
+      var pages = Math.max(1, Math.round(track.scrollWidth / track.clientWidth));
+      if (pages === dots.length) return;
+      dotsWrap.innerHTML = '';
+      dots = [];
+      for (var i = 0; i < pages; i++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'shelf-dot';
+        dot.setAttribute('aria-label', 'Ir para posição ' + (i + 1));
+        dot.addEventListener('click', (function (page) {
+          return function () { track.scrollTo({ left: page * track.clientWidth, behavior: 'smooth' }); };
+        })(i));
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      }
+      updateActiveDot();
+    }
+
+    function updateActiveDot() {
+      if (!dots.length) return;
+      var page = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === page); });
+    }
+
+    function checkOverflow() {
+      var isScrollable = track.scrollWidth > track.clientWidth + 4;
+      controls.classList.toggle('is-active', isScrollable);
+      if (isScrollable) buildDots();
+    }
+
+    checkOverflow();
+    window.addEventListener('resize', debounce(checkOverflow, 150));
+    window.addEventListener('load', checkOverflow);
+    track.addEventListener('scroll', debounce(updateActiveDot, 80));
   });
 
   // ---- Acordeão de único painel aberto (usado no detalhe do produto e no FAQ) ----
