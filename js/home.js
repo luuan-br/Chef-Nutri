@@ -16,7 +16,7 @@
   var HERO_CONTENT = [
     { title: 'Comida funcional, sem glúten e sem lactose', subtitle: 'Congelados artesanais, ingredientes naturais e zero conservantes — prontos em minutos.', cta: 'Ver Pizzas' },
     { title: 'Feito com ingredientes naturais', subtitle: 'Receitas testadas até chegar ao sabor de verdade, sem abrir mão da saúde.', cta: 'Nossos Diferenciais' },
-    { title: 'Sem Glúten e Sem Lactose', subtitle: 'Linha de produção dedicada, zero contaminação cruzada.', cta: 'Saiba Mais' },
+    { title: '<span class="hero-title--accent">Sem Glúten e</span><span class="hero-title--accent">Sem Lactose</span>', subtitle: 'Linha de produção dedicada, zero contaminação cruzada.', cta: 'Saiba Mais' },
   ];
 
   var current = 0;
@@ -26,7 +26,7 @@
     slides.forEach(function (s, i) { s.classList.toggle('is-active', i === current); });
     dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
     var c = HERO_CONTENT[current];
-    if (titleEl) titleEl.textContent = c.title;
+    if (titleEl) titleEl.innerHTML = c.title;
     if (subtitleEl) subtitleEl.textContent = c.subtitle;
     if (ctaEl) ctaEl.textContent = c.cta;
   }
